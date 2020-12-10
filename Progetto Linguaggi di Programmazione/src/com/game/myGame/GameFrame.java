@@ -106,7 +106,7 @@ public class GameFrame extends JFrame {
 		nameList.add(name);
 		
 		name="fly";
-		imgList = imgL.loadSheetImages("res/img/"+name, 1);
+		imgList = imgL.loadSheetImages("res/img/santa/"+name, 1);
 		imgL.insertImages(name, imgList);
 		nameList.add(name);
 		
@@ -182,6 +182,12 @@ public class GameFrame extends JFrame {
 		imgL.insertImages(name, imgList);
 		nameList.add(name);
 		
+		name="background level3";
+		imgList = new ArrayList<BufferedImage>();
+		imgList.add(imgL.loadImage("res/img/background level3.jpg"));
+		imgL.insertImages(name, imgList);
+		nameList.add(name);
+		
 		
 	}
 
@@ -225,6 +231,11 @@ public class GameFrame extends JFrame {
 			
 			case "level 2":{
 				mainPanel.add(levelName, new Level2(this,levelName));
+				break;
+			}
+			
+			case "level 3":{
+				mainPanel.add(levelName, new Level3(this,levelName));
 				break;
 			}
 			
