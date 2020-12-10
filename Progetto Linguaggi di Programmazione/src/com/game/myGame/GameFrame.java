@@ -105,6 +105,10 @@ public class GameFrame extends JFrame {
 		imgL.insertImages(name, imgList);
 		nameList.add(name);
 		
+		name="fly";
+		imgList = imgL.loadSheetImages("res/img/"+name, 1);
+		imgL.insertImages(name, imgList);
+		nameList.add(name);
 		
 		imgL.linkName("santa", nameList);
 		
