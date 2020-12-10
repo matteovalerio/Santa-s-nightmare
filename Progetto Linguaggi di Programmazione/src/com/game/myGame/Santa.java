@@ -25,6 +25,7 @@ public class Santa extends Sprite {
 	private int hitCounter = 0;//initial hit counter of santa. When he hits the enemy, the counter continue.
 	private int points= 0;//points of santa . For statistics only.
 	private String levelName;
+	private boolean specialMissile = false;
 	
 	
 	/**
@@ -158,6 +159,8 @@ public class Santa extends Sprite {
 	public int getHit(int damage) {
 		if(damage>=1 || damage <100)
 			life -=damage;
+		specialMissile = false;
+		hitCounter = 0;
 		return life;
 	}
 	
@@ -183,14 +186,19 @@ public class Santa extends Sprite {
 	 * Special attack by santa. It can happen only when he has hit at least 10 times the enemy.
 	 */
 	public void specialMissile() {
-		if(specialShootAvailable()) {
+		if(specialMissileAvailable()) {
 			Missiles m = new Missiles(getPosX(), getPosY(), "specialPresent", getImageLoader());
 			m.specialShot();
 			if(present.size()<10)
 				present.add(m);
-			hitCounter = 0;
 		}
 	}
+	private boolean specialMissileAvailable() {
+		if(hitCounter>=10)
+			specialMissile = true;
+		return specialMissile;
+	}
+
 	/**
 	 * Special attack by santa. It can happen only when he has hit at least 10 times the enemy.
 	 */
