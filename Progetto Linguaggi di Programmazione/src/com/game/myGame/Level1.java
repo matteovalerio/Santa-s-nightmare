@@ -300,6 +300,7 @@ public class Level1 extends Level implements Runnable {
 		
 		y = getHeight()*4/5;
 		dbg.setColor(Color.RED);
+		dbg.setFont(new Font("French Script MT", Font.BOLD,50));
 		dbg.drawString("A Friend?", x, y);
 		
 		
