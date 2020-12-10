@@ -15,7 +15,7 @@ import javax.swing.Timer;
  */
 public class Enemy extends Sprite {
 
-	private static final int LEVEL1 = 10;//500;
+	private static final int LEVEL1 = 500;
 	private static final int LEVEL2 = 1000;
 	private static final int LEVEL3 = 1500;
 	private int startingLife;

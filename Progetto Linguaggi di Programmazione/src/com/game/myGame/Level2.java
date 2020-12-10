@@ -206,10 +206,8 @@ public class Level2 extends Level implements Runnable{
 	
 	@Override
 	public void run() {
-		initCharacters();
 		
-		//TODO TO UNCOMMENT WHEN FINISHED
-	/*	startRender();
+		startRender();
 		paintScreen();
 		getFrame().getAudioEffects().startSound("evilYou");
 		try {
@@ -225,10 +223,11 @@ public class Level2 extends Level implements Runnable{
 			Thread.sleep(LEVEL_DELAY);
 		} catch(InterruptedException e) {
 			e.printStackTrace();
-		}*/
+		}
 		running = true;
 		startTime = System.currentTimeMillis();
 		getFrame().getAudioManager().playLoop("level2");
+		initCharacters();
 		santa.startLooping(ANIM_PERIOD, SEQ_DURATION);
 		
 		while(running) {
@@ -349,8 +348,69 @@ public class Level2 extends Level implements Runnable{
 		santa.paintSprite(dbg);
 		wizard.paintSprite(dbg);
 		
+		if(gameOver) {
+			getFrame().getAudioManager().stopLoop("level1");
+			if(santa.getLife()>0) {
+				gameOverMessage(dbg,"you win");
+				
+				
+				getFrame().getAudioEffects().startSound("levelWin");
+				try {
+					Thread.sleep(START_DELAY);
+				}
+				catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				
+				//TODO uncomment when creates the level3
+				//getFrame().nextLevel("level 3");
+				
+			}
+			else {
+				santa.setImage("die");
+				gameOverMessage(dbg,"you lose");
+
+				getFrame().getAudioEffects().startSound("gameOver");
+				try {
+					Thread.sleep(START_DELAY);
+				}
+				catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				getFrame().nextLevel("menu");
+
+			}
+		}
+		
 	}
 
+	
+	/**
+	 * Method called when the game is over:
+	 * it can happen when you win or when you lose the level.
+	 * @param dbg2 The graphics used to paint the message
+	 */
+	private void gameOverMessage(Graphics2D dbg2, String msg) {
+		// TODO Auto-generated method stub
+		
+		//calcola posizione x e y e messaggio msg
+		int x = getFrame().getWidth()*2/5;
+		int y = getFrame().getHeight()/2;
+		
+		
+
+		dbg2.setFont(new Font(font,Font.BOLD,70));
+
+
+
+		dbg.setColor(Color.RED);
+		dbg.drawString(msg, x, y);
+
+
+		
+		paintScreen();
+	}
+	
 	private void gameUpdate() {
 		if(!gameOver && !isPaused) {
 			santa.updateSprite();

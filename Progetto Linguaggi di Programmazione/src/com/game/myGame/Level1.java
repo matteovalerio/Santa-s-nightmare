@@ -8,17 +8,10 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import javax.swing.AbstractAction;
-import javax.swing.ActionMap;
-import javax.swing.InputMap;
-import javax.swing.JComponent;
-import javax.swing.KeyStroke;
 
 /**
  * This class represents the first level of the game. It has a thread that runs and manages the animation.
@@ -228,7 +221,7 @@ public class Level1 extends Level implements Runnable {
 	 * It will also adjourn the statistics with storeStats()
 	 */
 	public void run() {
-	/*	startRender();
+		startRender();
 		paintScreen();
 		getFrame().getAudioEffects().startSound("evilLaugh");
 		try {
@@ -243,7 +236,7 @@ public class Level1 extends Level implements Runnable {
 			Thread.sleep(LEVEL_DELAY);
 		} catch(InterruptedException e) {
 			e.printStackTrace();
-		}*/
+		}
 		running = true;
 		startTime = System.currentTimeMillis();
 		
@@ -429,19 +422,14 @@ public class Level1 extends Level implements Runnable {
 	 * @param dbg2 The graphics used to paint the message
 	 */
 	private void gameOverMessage(Graphics2D dbg2, String msg) {
-		// TODO Auto-generated method stub
 		
 		//calcola posizione x e y e messaggio msg
-		System.out.println(running);
-		int x = getFrame().getWidth()/3;
-		int y = getFrame().getHeight()/3;
+		int x = getFrame().getWidth()*2/5;
+		int y = getFrame().getHeight()/2;
 		
 		
-	/*	dbg2.setColor(Color.BLACK);
-		dbg2.fillRect(0, 0, getFrame().getWidth(), getFrame().getHeight());*/
 		dbg2.setFont(new Font(font,Font.BOLD,70));
 
-	//	dbg2.setColor(Color.WHITE);
 
 		dbg.setColor(Color.RED);
 		dbg.drawString(msg, x, y);

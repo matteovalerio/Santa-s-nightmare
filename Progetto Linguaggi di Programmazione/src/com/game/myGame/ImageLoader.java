@@ -103,6 +103,7 @@ public class ImageLoader {
 		if(listImg==null) {
 			throw new IllegalArgumentException("List is null");
 		}
+		System.out.println("Loading image:"+name);
 		imagesMap.put(name, listImg);
 	}
 	
