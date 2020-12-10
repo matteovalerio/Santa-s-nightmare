@@ -16,8 +16,9 @@ import javax.swing.Timer;
 public class Enemy extends Sprite {
 
 	private static final int LEVEL1 = 10;//500;
-	private static final int LEVEL2 = 1000;
+	private static final int LEVEL2 = 10;//00;
 	private static final int LEVEL3 = 1500;
+	private int startingLife;
 	private int life; //life of the Enemy
 	private ArrayList<Fire> fires = new ArrayList<>();
 
@@ -33,7 +34,9 @@ public class Enemy extends Sprite {
 	private int targetX;
 	private int xMax;
 	private int level;
-	private static int XSTEP = 1;
+	private final int SPEEDX1 = 8;
+	private final int SPEEDX2 = 16;
+	private int speed;
 	
 	/**
 	 * Public constructor. It builds the enemy sprite. It also adjust the position for this particular sprite
@@ -54,11 +57,13 @@ public class Enemy extends Sprite {
 			break;
 		case 2:
 			life = LEVEL2;
+			speed = SPEEDX1;
 			break;
 		case 3:
 			life = LEVEL3;
 			break;
 		} // switch
+		startingLife = life;
 		setPosY(posY-getHeight());
 		setPosX(getPosX()-getWidth());
 
@@ -106,7 +111,7 @@ public class Enemy extends Sprite {
 							break;
 						}
 						case 2:{
-							fire2();
+							bomb2();
 							break;
 						}
 					}
@@ -131,21 +136,7 @@ public class Enemy extends Sprite {
 	 * @return The percentage of remaining life 
 	 */
 	public int getLifePercent() {
-		int lifePercent = life*100;
-		switch(level) {
-			case 1: {
-				lifePercent /= LEVEL1;
-				break;
-			}
-			case 2:{
-				lifePercent /= LEVEL2;
-				break;
-			}
-			case 3:{
-				lifePercent /= LEVEL3;
-				break;
-			}
-		}
+		int lifePercent = life*100/startingLife;
 		if(lifePercent<0)
 			lifePercent = 0;
 		return lifePercent;
@@ -159,7 +150,7 @@ public class Enemy extends Sprite {
 	public int hit(int damage) {
 		if(damage>0)
 			life-=damage;
-		if(life<=LEVEL1/2) {
+		if(life<=startingLife/2) {
 			timer.setDelay(DELAY1);
 			fireCounter =FIRE2;
 		}
@@ -205,18 +196,66 @@ public class Enemy extends Sprite {
 	}
 	
 	public void bomb() {
-		fires.add(new Bomb(getPosX()+getWidth()/2,getPosY()+getHeight(),"bomb",getImageLoader(),fireCounter));
+		counter++;
+		if(counter==6) {
+			counter = 0;
+			fires.add(new Bomb(getPosX()+getWidth()/2,getPosY()+getHeight(),"bomb",getImageLoader(),fireCounter));
+			fires.add(new Bomb(getPosX()+getWidth(),getPosY()+getHeight(),"bomb",getImageLoader(),fireCounter));
+		}
+		else if(counter == 4) {
+			fires.add(new Bomb(getPosX()+getWidth()/2,getPosY()+getHeight()*2,"bomb",getImageLoader(),fireCounter));
+			fires.add(new Bomb(getPosX()+getWidth(),getPosY()+getHeight(),"bomb",getImageLoader(),fireCounter));
+		}
+		else if(counter ==2) {
+			fires.add(new Bomb(getPosX()+getWidth()/2,getPosY()+getHeight(),"bomb",getImageLoader(),fireCounter));
+			fires.add(new Bomb(getPosX()+getWidth(),getPosY()+getHeight(),"bomb",getImageLoader(),fireCounter));
+			fires.add(new Bomb(getPosX(),getPosY()+getHeight(),"bomb",getImageLoader(),fireCounter));
+		}
+		else 
+			fires.add(new Bomb(getPosX()+getWidth()/2,getPosY()+getHeight(),"bomb",getImageLoader(),fireCounter));
 		move();
+	}
+	
+	public void bomb2() {
+		counter++;
+		if(counter==6) {
+			counter =0;
+			fires.add(new Bomb(getPosX()+getWidth()/2,getPosY()+getHeight(),"bomb",getImageLoader(),fireCounter));
+			fires.add(new Bomb(getPosX()+getWidth()*3/2,getPosY()+getHeight(),"bomb",getImageLoader(),fireCounter));
+			fires.add(new Bomb(getPosX()+getWidth(),getPosY()+getHeight(),"bomb",getImageLoader(),fireCounter));
+			fires.add(new Bomb(getPosX(),getPosY()+getHeight(),"bomb",getImageLoader(),fireCounter));
+		}
+		else if(counter ==4) {
+			fires.add(new Bomb(getPosX()+getWidth()/2,getPosY()+getHeight()*2,"bomb",getImageLoader(),fireCounter));
+			fires.add(new Bomb(getPosX()+getWidth(),getPosY()+getHeight(),"bomb",getImageLoader(),fireCounter));
+			fires.add(new Bomb(getPosX(),getPosY()+getHeight()/2,"bomb",getImageLoader(),fireCounter));
+		}
+		else if(counter ==2) {
+			fires.add(new Bomb(getPosX()+getWidth(),getPosY()+getHeight(),"bomb",getImageLoader(),fireCounter));
+			fires.add(new Bomb(getPosX()+getWidth()*2,getPosY()+getHeight()*2,"bomb",getImageLoader(),fireCounter));
+			fires.add(new Bomb(getPosX()+getWidth()/2,getPosY()+getHeight()/2,"bomb",getImageLoader(),fireCounter));
+			fires.add(new Bomb(getPosX()+getWidth()*3/2,getPosY()+getHeight()*3/2,"bomb",getImageLoader(),fireCounter));
+		}
+		else {
+			fires.add(new Bomb(getPosX()+getWidth()/2,getPosY()+getHeight(),"bomb",getImageLoader(),fireCounter));
+			fires.add(new Bomb(getPosX()+getWidth(),getPosY()+getHeight()*3/2,"bomb",getImageLoader(),fireCounter));
+			fires.add(new Bomb(getPosX(),getPosY()+getHeight()*3/2,"bomb",getImageLoader(),fireCounter));
+			fires.add(new Bomb(getPosX()+getWidth()/2,getPosY()+getHeight()*2,"bomb",getImageLoader(),fireCounter));
+		}
 	}
 	
 	public void move() {
 		int posX = getPosX();
-		if(posX-targetX>0) 
-			setDx(-XSTEP);
-		else if(posX-targetX<0)
-			setDx(XSTEP);
+		if(posX-targetX>0 && posX-speed-targetX>0) 
+			setDx(-speed);
+		else if(posX-targetX<0 && posX + speed-targetX<0)
+			setDx(speed);
 		else
 			targetX = r.nextInt(xMax-getWidth());
+	}
+	
+	public void increaseSpeed() {
+		speed = SPEEDX2;
 	}
 	
 	/**

@@ -433,7 +433,7 @@ public class Level1 extends Level implements Runnable {
 		//calcola posizione x e y e messaggio msg
 		System.out.println(running);
 		int x = getFrame().getWidth()/3;
-		int y = getFrame().getHeight()*1/5;
+		int y = getFrame().getHeight()/3;
 		
 		
 	/*	dbg2.setColor(Color.BLACK);
