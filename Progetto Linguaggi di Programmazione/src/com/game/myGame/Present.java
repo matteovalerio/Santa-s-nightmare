@@ -26,14 +26,14 @@ public class Present extends Sprite {
 	public Present(int posX, int posY, String name, ImageLoader imgL) {
 		super(posX+ADJUSTX, posY, name, imgL);
 		isVisible=true;
-		isSpecial = false;
+		setSpecial(false);
 		setPosY(posY);
 		resize();
 		move();
 	}
 
 	
-	private void resize() {
+	protected void resize() {
 		setImageDimension(new Dimension(25,25));
 	}
 	
@@ -82,8 +82,8 @@ public class Present extends Sprite {
 	public void specialShot() {
 		setImage("specialPresent");
 		resize();
-		damage *=4;
-		isSpecial = true;
+		setDamage(getDamage() * 4);
+		setSpecial(true);
 	}
 	
 	/**
@@ -99,6 +99,16 @@ public class Present extends Sprite {
 	 */
 	public void normalShot() {
 		setImage("present");
-		damage = START_DAMAGE;
+		setDamage(START_DAMAGE);
+	}
+
+
+	public void setDamage(int damage) {
+		this.damage = damage;
+	}
+
+
+	public void setSpecial(boolean isSpecial) {
+		this.isSpecial = isSpecial;
 	}
 }

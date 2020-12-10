@@ -1,5 +1,6 @@
 package com.game.myGame;
 
+import java.awt.Dimension;
 import java.awt.Graphics;
 
 public class Missiles extends Present {
@@ -17,6 +18,19 @@ public class Missiles extends Present {
 		setPosY(getPosY()-WATER_SPEED);
 	}
 	
+	/**
+	 * It sets the type of present to special so it does more damage and change the image
+	 */
+	public void specialShot() {
+		setImage("specialPresent");
+		resizeSpecial();
+		setDamage(getDamage() * 4);
+		setSpecial(true);
+	}
+	
+	private void resizeSpecial() {
+		setImageDimension(new Dimension(50,50));
+	}
 	/**
 	 * It paints this sprite to the screen
 	 */

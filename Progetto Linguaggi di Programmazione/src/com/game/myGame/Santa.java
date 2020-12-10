@@ -182,6 +182,18 @@ public class Santa extends Sprite {
 	/**
 	 * Special attack by santa. It can happen only when he has hit at least 10 times the enemy.
 	 */
+	public void specialMissile() {
+		if(specialShootAvailable()) {
+			Missiles m = new Missiles(getPosX(), getPosY(), "specialPresent", getImageLoader());
+			m.specialShot();
+			if(present.size()<10)
+				present.add(m);
+			hitCounter = 0;
+		}
+	}
+	/**
+	 * Special attack by santa. It can happen only when he has hit at least 10 times the enemy.
+	 */
 	public void specialFire() {
 		if(specialShootAvailable()) {
 			Present p = new Present(getPosX(), getPosY(), "specialPresent", getImageLoader());

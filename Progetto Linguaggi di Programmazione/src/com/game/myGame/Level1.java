@@ -1,6 +1,7 @@
 package com.game.myGame;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -488,8 +489,12 @@ public class Level1 extends Level implements Runnable {
 		ArrayList<Present> present = santa.getPresents();
 		ArrayList<Fire> fires = wizard.getFires();
 		
-		//fires/santa
-		for(Fire f:fires) {
+		Fire f;
+		Present p;
+		
+		//fires santa
+		for(int i =0;i<fires.size();i++) {
+			f = fires.get(i);
 			fR = f.getMyRectangle();
 			if(fR.intersects(sR)) {
 				int life = santa.getHit(f.getDamage());
@@ -497,12 +502,16 @@ public class Level1 extends Level implements Runnable {
 				if(life<=0) {
 					gameOver = true;
 					running = false;
-					santa.setImage("die");
+					int wSanta = santa.getWidth();
+					int hSanta = santa.getHeight();
+					santa.setImage("explosion");
+					santa.setImageDimension(new Dimension(wSanta,hSanta));
 				}
 				f.setVisible(false);
 			}
 			// spell/present and present/wizard
-			for(Present p:present) {
+			for(int j=0;j<present.size();j++) {
+				p = present.get(j);
 				pR = p.getMyRectangle();
 				if(pR.intersects(fR)) {
 					if(p.isSpecial()) {
