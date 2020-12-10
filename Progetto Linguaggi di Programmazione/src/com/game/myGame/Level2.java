@@ -390,7 +390,7 @@ public class Level2 extends Level implements Runnable{
 		
 		Fire f;
 		Present p;
-		
+		//fires/santa
 		for(int i =0;i<fires.size();i++) {
 			f = fires.get(i);
 			fR = f.getMyRectangle();
@@ -407,7 +407,7 @@ public class Level2 extends Level implements Runnable{
 				}
 				f.setVisible(false);
 			}
-			
+			// spell/present and present/wizard
 			for(int j=0;j<present.size();j++) {
 				p = present.get(j);
 				pR = p.getMyRectangle();
@@ -430,46 +430,7 @@ public class Level2 extends Level implements Runnable{
 				}
 			}
 		}
-		
-		
-		//fires/santa
-	/*	for(Fire f:fires) {
-			fR = f.getMyRectangle();
-			if(fR.intersects(sR)) {
-				int life = santa.getHit(f.getDamage());
-				getFrame().getAudioEffects().startSound("santaGrunt");
-				if(life<=0) {
-					gameOver = true;
-					running = false;
-					int wSanta = santa.getWidth();
-					int hSanta = santa.getHeight();
-					santa.setImage("explosion");
-					santa.setImageDimension(new Dimension(wSanta,hSanta));
-				}
-				f.setVisible(false);
-			}
-			// spell/present and present/wizard
-			for(Present p:present) {
-				pR = p.getMyRectangle();
-				if(pR.intersects(fR)) {
-					if(p.isSpecial()) {
-						f.setVisible(false);
-					}
-					else
-						p.setVisible(false);
-				}
-				else if(pR.intersects(eR) && p.isVisible()) {
-					int life = wizard.hit(p.getDamage());
-					getFrame().getAudioEffects().startSound("evilGrunt");
-					santa.incrementHitCounter();
-					p.setVisible(false);
-					if(life<=0) {
-						gameOver = true;
-						running = false;
-					}
-				}
-			}
-		}*/	
+			
 	}
 
 }
