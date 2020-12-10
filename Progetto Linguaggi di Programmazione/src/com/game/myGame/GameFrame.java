@@ -123,6 +123,11 @@ public class GameFrame extends JFrame {
 		imgL.insertImages(name, imgList);
 		nameList.add(name);
 		
+		name="skull";
+		imgList = imgL.loadSheetImages("res/img/evil wizard/"+name, 1);
+		imgL.insertImages(name, imgList);
+		nameList.add(name);
+		
 		
 		imgL.linkName("evil wizard", nameList);
 		
