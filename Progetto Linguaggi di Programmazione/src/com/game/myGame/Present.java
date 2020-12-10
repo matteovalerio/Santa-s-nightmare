@@ -32,7 +32,9 @@ public class Present extends Sprite {
 		move();
 	}
 
-	
+	/**
+	 * Resizes the sprite to a square
+	 */
 	protected void resize() {
 		setImageDimension(new Dimension(25,25));
 	}
@@ -103,11 +105,19 @@ public class Present extends Sprite {
 	}
 
 
+	/**
+	 * Set a new value for damage created by this present
+	 * @param damage The new damage
+	 */
 	public void setDamage(int damage) {
 		this.damage = damage;
 	}
 
 
+	/**
+	 * Change the type of the present to special
+	 * @param isSpecial True if special
+	 */
 	public void setSpecial(boolean isSpecial) {
 		this.isSpecial = isSpecial;
 	}

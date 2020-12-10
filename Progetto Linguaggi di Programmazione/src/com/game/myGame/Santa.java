@@ -193,6 +193,11 @@ public class Santa extends Sprite {
 				present.add(m);
 		}
 	}
+	
+	/**
+	 * 
+	 * @return True if there is a special missile available. Only level2.
+	 */
 	private boolean specialMissileAvailable() {
 		if(hitCounter>=10)
 			specialMissile = true;

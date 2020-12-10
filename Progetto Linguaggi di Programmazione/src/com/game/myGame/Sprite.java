@@ -178,11 +178,19 @@ public class Sprite {
 			dx = -XSTEP;
 	}
 	
+	/**
+	 * It moves up the screen the sprite
+	 * @param rightDirection True if facing right
+	 */
 	public void moveUp(boolean rightDirection) {
 		this.rightDirection = rightDirection;
 		dy = -YSTEP;
 	}
 	
+	/**
+	 * Moves down the sprite
+	 * @param rightDirection True if facing right
+	 */
 	public void moveDown(boolean rightDirection) {
 		this.rightDirection = rightDirection;
 		dy = YSTEP;
@@ -236,6 +244,10 @@ public class Sprite {
 		return dx;
 	}
 	
+	/**
+	 * It sets the new movement 
+	 * @param dx The steps of movement
+	 */
 	public void setDx(int dx) {
 		this.dx = dx;
 	}
@@ -296,6 +308,10 @@ public class Sprite {
 		return rightDirection;
 	}
 	
+	/**
+	 * 
+	 * @return The name of the sprite
+	 */
 	public String getName() {
 		return name;
 	}

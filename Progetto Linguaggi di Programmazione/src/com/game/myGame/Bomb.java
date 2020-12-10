@@ -1,14 +1,22 @@
 package com.game.myGame;
 
 import java.awt.Graphics;
-
+/**
+ * This class represents the bomb launched by the enemy during level 2
+ * @author MatteoValerio
+ *
+ */
 public class Bomb extends Fire {
 
+	
 	public Bomb(int posX, int posY, String name, ImageLoader imgL, int count) {
 		super(posX, posY, name, imgL, count);
 		// TODO Auto-generated constructor stub
 	}
 	
+	/**
+	 * Move the sprite vertically down
+	 */
 	public void move() {
 		setDx(0);
 		setDy(YSTEP);

@@ -3,15 +3,29 @@ package com.game.myGame;
 import java.awt.Dimension;
 import java.awt.Graphics;
 
+/**
+ * This class represents the presents launched in level 2.
+ * @author MatteoValerio
+ *
+ */
 public class Missiles extends Present {
 
 	private int WATER_SPEED = SPEED/4;
 	
+	/**
+	 * Public constructor. See present public constructor
+	 * @param posX
+	 * @param posY
+	 * @param name
+	 * @param imgL
+	 */
 	public Missiles(int posX, int posY, String name, ImageLoader imgL) {
 		super(posX, posY, name, imgL);
-		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * Move the missile vertically
+	 */
 	public void move() {
 		setDx(0);
 		setDy(-WATER_SPEED);
@@ -28,6 +42,9 @@ public class Missiles extends Present {
 		setSpecial(true);
 	}
 	
+	/**
+	 * It resizes the special bomb
+	 */
 	private void resizeSpecial() {
 		setImageDimension(new Dimension(50,50));
 	}

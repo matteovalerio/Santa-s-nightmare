@@ -258,6 +258,9 @@ public class Level1 extends Level implements Runnable {
 		
 	}
 	
+	/**
+	 * Initialize the characters, building the objects
+	 */
 	private void initCharacters() {
 		wizard = new Enemy(getFrame().getWidth(), getFrame().getHeight(), "eStand", getFrame().getImageLoader(),getFrame().getWidth(),1);
 		santa = new Santa(0, getFrame().getHeight(), "stand", getFrame().getImageLoader(), getFrame().getWidth()-(wizard.getWidth()*2), getName());

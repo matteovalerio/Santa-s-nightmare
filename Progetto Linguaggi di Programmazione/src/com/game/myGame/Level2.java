@@ -12,6 +12,11 @@ import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+/**
+ * This class represents the second level of the game.
+ * @author MatteoValerio
+ *
+ */
 public class Level2 extends Level implements Runnable{
 
 	private boolean running;
@@ -33,7 +38,11 @@ public class Level2 extends Level implements Runnable{
 	private Santa santa;
 	private Enemy wizard;
 	
-	
+	/**
+	 * Public constructor
+	 * @param frame GameFrame 
+	 * @param name Name of the level
+	 */
 	public Level2(GameFrame frame, String name) {
 		super(frame, name);
 		running = false;
@@ -41,6 +50,9 @@ public class Level2 extends Level implements Runnable{
 		init();
 	}
 
+	/**
+	 * Initialize the level
+	 */
 	private void init() {
 		setBackground(Color.BLACK);
 		loadBackground();
@@ -139,6 +151,9 @@ public class Level2 extends Level implements Runnable{
 		
 	}
 	
+	/**
+	 * Loads the background
+	 */
 	private void loadBackground() {
 		background = getFrame().getImageLoader().getImage("background level2");
 	}
@@ -196,6 +211,9 @@ public class Level2 extends Level implements Runnable{
 		}
 	}
 	
+	/**
+	 * Initialize the characters
+	 */
 	private void initCharacters() {
 		wizard = new Enemy(getFrame().getWidth()/2, background.getHeight()*4/7, "evilShip", getFrame().getImageLoader(),getFrame().getWidth(),2);
 		santa = new Santa(0, getFrame().getHeight(), "sub", getFrame().getImageLoader(), getFrame().getWidth(), getName());
@@ -204,9 +222,12 @@ public class Level2 extends Level implements Runnable{
 	}
 	
 	
+	/**
+	 * @Override The game loop
+	 */
 	@Override
 	public void run() {
-		
+		//start scene
 		startRender();
 		paintScreen();
 		getFrame().getAudioEffects().startSound("evilYou");
@@ -229,7 +250,7 @@ public class Level2 extends Level implements Runnable{
 		getFrame().getAudioManager().playLoop("level2");
 		initCharacters();
 		santa.startLooping(ANIM_PERIOD, SEQ_DURATION);
-		
+		//real game loop
 		while(running) {
 			gameUpdate();
 			gameRender();
@@ -287,7 +308,9 @@ public class Level2 extends Level implements Runnable{
 	}
 
 	
-	
+	/**
+	 * For rendering the image in the screen. It is called each loop
+	 */
 	private void gameRender() {
 		if(dbimg == null) {
 			dbimg = createImage(getFrame().getWidth(),getFrame().getHeight());
@@ -306,6 +329,7 @@ public class Level2 extends Level implements Runnable{
 	
 		dbg.drawImage(background, 0, 0, getFrame().getWidth(), getFrame().getHeight(), this);
 		
+		//display time passed and the remaining life of santa and the enemy
 		dbg.setFont(new Font(font,Font.BOLD,30));
 		Color c = new Color(228,52,27);	//creates a custom red color
 		dbg.setColor(c);
@@ -316,6 +340,8 @@ public class Level2 extends Level implements Runnable{
 	
 		dbg.drawString("Santa: "+santa.getLifePercent()+"%"+"     The Guy: "+wizard.getLifePercent()+"%", getWidth()*3/4, 100);
 		
+		//check if santa has special shoots 
+		//if so it display an icon on the screen
 		if(santa.specialShootAvailable()) {
 			BufferedImage temp = getFrame().getImageLoader().getImage("specialPresent");
 			dbg.drawImage(temp,getWidth()*3/4, 120, 25 , 25, this);
@@ -348,6 +374,7 @@ public class Level2 extends Level implements Runnable{
 		santa.paintSprite(dbg);
 		wizard.paintSprite(dbg);
 		
+		//if game over, it stops the loop
 		if(gameOver) {
 			getFrame().getAudioManager().stopLoop("level1");
 			if(santa.getLife()>0) {
@@ -361,7 +388,7 @@ public class Level2 extends Level implements Runnable{
 				catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				
+				//and go to the next Level
 				//TODO uncomment when creates the level3
 				//getFrame().nextLevel("level 3");
 				
@@ -377,6 +404,7 @@ public class Level2 extends Level implements Runnable{
 				catch (InterruptedException e) {
 					e.printStackTrace();
 				}
+				//and go back to the menu
 				getFrame().nextLevel("menu");
 
 			}
@@ -411,6 +439,9 @@ public class Level2 extends Level implements Runnable{
 		paintScreen();
 	}
 	
+	/**
+	 * Called to update the variable of the game each loop
+	 */
 	private void gameUpdate() {
 		if(!gameOver && !isPaused) {
 			santa.updateSprite();

@@ -73,7 +73,10 @@ public class Enemy extends Sprite {
 	}//constructor
 	
 	
-	
+	/**
+	 * It starts the timer and activate some attacks, depending on the level
+	 * @param level The level
+	 */
 	private void startTimer(int level) {
 		switch(level) {
 		case 1:{	
@@ -195,6 +198,9 @@ public class Enemy extends Sprite {
 		
 	}
 	
+	/**
+	 * This method creates a new bomb for level 2
+	 */
 	public void bomb() {
 		counter++;
 		if(counter==6) {
@@ -216,6 +222,9 @@ public class Enemy extends Sprite {
 		move();
 	}
 	
+	/**
+	 * This method creates a special bomb for level 2
+	 */
 	public void bomb2() {
 		counter++;
 		if(counter==6) {
@@ -244,6 +253,9 @@ public class Enemy extends Sprite {
 		}
 	}
 	
+	/**
+	 * It moves the enemy, for level 2
+	 */
 	public void move() {
 		int posX = getPosX();
 		if(posX-targetX>0 && posX-speed-targetX>0) 
@@ -254,6 +266,9 @@ public class Enemy extends Sprite {
 			targetX = r.nextInt(xMax-getWidth());
 	}
 	
+	/**
+	 * It changes the speed of the enemy
+	 */
 	public void increaseSpeed() {
 		speed = SPEEDX2;
 	}
