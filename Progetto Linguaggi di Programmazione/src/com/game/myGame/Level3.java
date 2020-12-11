@@ -31,7 +31,7 @@ public class Level3 extends Level implements Runnable{
 	private Thread animator;
 	private boolean isPaused;
 	private Santa santa;
-	private Enemy wizard;
+	private Krampus wizard;
 	
 	/**
 	 * Public constructor
@@ -87,7 +87,7 @@ public class Level3 extends Level implements Runnable{
 		
 		addKeyBinding(this, KeyEvent.VK_UP, "up", false, (evt)->{
 			boolean rightDirection = santa.isRightDirection();
-			santa.moveUp(rightDirection);
+			santa.flyUp(rightDirection);
 			santa.startLooping(400, 4);	//warning
 		});
 
@@ -122,7 +122,7 @@ public class Level3 extends Level implements Runnable{
 		
 		addKeyBinding(this, KeyEvent.VK_D, "fire", false, (evt)->{
 			getFrame().getAudioEffects().startSound("shoot");
-			santa.missiles();
+			santa.fire();
 			santa.startLooping(400, 4);
 		});
 		
@@ -134,7 +134,7 @@ public class Level3 extends Level implements Runnable{
 		addKeyBinding(this, KeyEvent.VK_S, "special", false, (evt)->{
 			if(santa.specialShootAvailable()) {
 				getFrame().getAudioEffects().startSound("shoot");
-				santa.specialMissile();
+				santa.specialFire();
 			}				
 			santa.startLooping(400, 4);
 		});
@@ -210,10 +210,10 @@ public class Level3 extends Level implements Runnable{
 	 * Initialize the characters
 	 */
 	private void initCharacters() {
-//		wizard = new Enemy(getFrame().getWidth()/2, background.getHeight()*4/7, "evilShip", getFrame().getImageLoader(),getFrame().getWidth(),2);
-//		santa = new Santa(0, getFrame().getHeight(), "sub", getFrame().getImageLoader(), getFrame().getWidth(), getName());
-		
-//		santa.setYMax(getFrame().getHeight());
+		wizard = new Krampus(getFrame().getWidth(), getFrame().getHeight(), "skull", getFrame().getImageLoader(),getFrame().getWidth(),1);
+		santa = new Santa(0, getFrame().getHeight(), "fly", getFrame().getImageLoader(), getFrame().getWidth(), getName());
+		santa.setImageDimension(new Dimension(123,82));
+		santa.setYMax(getFrame().getHeight());
 	}
 	
 	
@@ -223,7 +223,7 @@ public class Level3 extends Level implements Runnable{
 	@Override
 	public void run() {
 		//start scene
-		startRender();
+	/*	startRender();
 		paintScreen();
 		getFrame().getAudioEffects().startSound("evilHell");
 		try {
@@ -239,12 +239,13 @@ public class Level3 extends Level implements Runnable{
 			Thread.sleep(LEVEL_DELAY);
 		} catch(InterruptedException e) {
 			e.printStackTrace();
-		}
+		}*/
 		running = true;
 		startTime = System.currentTimeMillis();
 		getFrame().getAudioManager().playLoop("level3");
 		initCharacters();
-	//	santa.startLooping(ANIM_PERIOD, SEQ_DURATION);
+		santa.startLooping(ANIM_PERIOD, SEQ_DURATION);
+		wizard.startLooping(ANIM_PERIOD, SEQ_DURATION);
 		//real game loop
 		while(running) {
 			gameUpdate();
@@ -334,7 +335,7 @@ public class Level3 extends Level implements Runnable{
 		else
 			dbg.drawString("Time: " + minutesPassed + "m" +  secondsPassed + "s", 100, 100);
 	
-	/*	dbg.drawString("Santa: "+santa.getLifePercent()+"%"+"     The Guy: "+wizard.getLifePercent()+"%", getWidth()*3/4, 100);
+		dbg.drawString("Santa: "+santa.getLifePercent()+"%"+"     The Guy: "+wizard.getLifePercent()+"%", getWidth()*3/4, 100);
 		
 		//check if santa has special shoots 
 		//if so it display an icon on the screen
@@ -347,7 +348,7 @@ public class Level3 extends Level implements Runnable{
 		ArrayList<Present> p = santa.getPresents();
 		if(p!=null) {
 			for(int i = 0;i<p.size();i++) {
-				if(p.get(i).getPosY()<0 || !(p.get(i).isVisible())) {
+				if(p.get(i).getPosX()>getWidth() || !(p.get(i).isVisible())) {
 					p.remove(i);
 				}
 				else
@@ -355,7 +356,7 @@ public class Level3 extends Level implements Runnable{
 			}//for
 		}//if
 		
-		ArrayList<Fire> f = wizard.getFires();
+		ArrayList<SpecialFire> f = wizard.getSpecialFires();
 		if(f!=null) {
 			for(int i = 0;i<f.size();i++) {
 				if(f.get(i).getPosX()>getWidth() || !(f.get(i).isVisible())) {
@@ -385,8 +386,7 @@ public class Level3 extends Level implements Runnable{
 					e.printStackTrace();
 				}
 				//and go to the next Level
-				//TODO uncomment when creates the level3
-				//getFrame().nextLevel("level 3");
+				//TODO uncomment when creates the end
 				
 			}
 			else {
@@ -404,7 +404,7 @@ public class Level3 extends Level implements Runnable{
 				getFrame().nextLevel("menu");
 
 			}
-		}*/
+		}
 		
 	}
 
@@ -440,10 +440,11 @@ public class Level3 extends Level implements Runnable{
 	 */
 	private void gameUpdate() {
 		if(!gameOver && !isPaused) {
-//			santa.updateSprite();
-	//		wizard.move();
-	//		wizard.updateSprite();
-	//		checkCollision();
+			santa.updateSprite();
+			wizard.setTarget(santa.getPosX(), santa.getPosY());
+			wizard.move();
+			wizard.updateSprite();
+			checkCollision();
 		}
 		else if(gameOver) {
 			running = false;
@@ -473,7 +474,7 @@ public class Level3 extends Level implements Runnable{
 		Rectangle eR = wizard.getMyRectangle();
 		Rectangle pR,fR;
 		ArrayList<Present> present = santa.getPresents();
-		ArrayList<Fire> fires = wizard.getFires();
+		ArrayList<SpecialFire> fires = wizard.getSpecialFires();
 		
 		Fire f;
 		Present p;

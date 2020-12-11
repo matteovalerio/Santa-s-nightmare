@@ -15,27 +15,28 @@ import javax.swing.Timer;
  */
 public class Enemy extends Sprite {
 
-	private static final int LEVEL1 = 200;
-	private static final int LEVEL2 = 400;
-	private static final int LEVEL3 = 800;
+	protected static final int LEVEL1 = 200;
+	protected static final int LEVEL2 = 400;
+	protected static final int LEVEL3 = 800;
 	private int startingLife;
 	private int life; //life of the Enemy
 	private ArrayList<Fire> fires = new ArrayList<>();
 
-	private final int FIRE1 = 1;
-	private final int FIRE2 = 2;
-	private int fireCounter = FIRE1;
+	protected final int FIRE1 = 1;
+	protected final int FIRE2 = 2;
+
+	protected int fireCounter = FIRE1;
 	
 	private int counter = 0;
 	private Timer timer;
-	private final int DELAY = 1300;
-	private final int DELAY1 = 1000;
+	protected final int DELAY = 1300;
+	protected final int DELAY1 = 1000;
 	private Random r = new Random();
 	private int targetX;
 	private int xMax;
 	private int level;
-	private final int SPEEDX1 = 8;
-	private final int SPEEDX2 = 16;
+	protected final int SPEEDX1 = 8;
+	protected final int SPEEDX2 = 16;
 	private int speed;
 	
 	/**
@@ -69,7 +70,7 @@ public class Enemy extends Sprite {
 
 
 		//starting a timer: each DELAY a new fire is created
-		startTimer(level);
+//		startTimer(level);
 	}//constructor
 	
 	
@@ -77,52 +78,26 @@ public class Enemy extends Sprite {
 	 * It starts the timer and activate some attacks, depending on the level
 	 * @param level The level
 	 */
-	private void startTimer(int level) {
-		switch(level) {
-		case 1:{	
-			fire();
-			timer = new Timer(DELAY, new ActionListener() {
+	public void startTimer() {
+		fire();
+		timer = new Timer(DELAY, new ActionListener() {
 	
-				@Override
-				public void actionPerformed(ActionEvent e) {
+			@Override
+			public void actionPerformed(ActionEvent e) {
 
-					switch(fireCounter) {
-						case 1: {
-							fire();
-							break;
-						}
-						case 2:{
-							fire2();
-							break;
-						}
+				switch(fireCounter) {
+					case 1: {
+						fire();
+						break;
+					}
+					case 2:{
+						fire2();
+						break;
 					}
 				}
-				
-			});
-			break;
-		}
-		
-		case 2:{
-			timer = new Timer(DELAY, new ActionListener() {
-				
-				@Override
-				public void actionPerformed(ActionEvent e) {
-
-					switch(fireCounter) {
-						case 1: {
-							bomb();
-							break;
-						}
-						case 2:{
-							bomb2();
-							break;
-						}
-					}
-				}
-				
-			});
-		}
-		}
+			}
+			
+		});
 		timer.start();
 	}
 	
@@ -198,60 +173,7 @@ public class Enemy extends Sprite {
 		
 	}
 	
-	/**
-	 * This method creates a new bomb for level 2
-	 */
-	public void bomb() {
-		counter++;
-		if(counter==6) {
-			counter = 0;
-			fires.add(new Bomb(getPosX()+getWidth()/2,getPosY()+getHeight(),"bomb",getImageLoader(),fireCounter));
-			fires.add(new Bomb(getPosX()+getWidth(),getPosY()+getHeight(),"bomb",getImageLoader(),fireCounter));
-		}
-		else if(counter == 4) {
-			fires.add(new Bomb(getPosX()+getWidth()/2,getPosY()+getHeight()*2,"bomb",getImageLoader(),fireCounter));
-			fires.add(new Bomb(getPosX()+getWidth(),getPosY()+getHeight(),"bomb",getImageLoader(),fireCounter));
-		}
-		else if(counter ==2) {
-			fires.add(new Bomb(getPosX()+getWidth()/2,getPosY()+getHeight(),"bomb",getImageLoader(),fireCounter));
-			fires.add(new Bomb(getPosX()+getWidth(),getPosY()+getHeight(),"bomb",getImageLoader(),fireCounter));
-			fires.add(new Bomb(getPosX(),getPosY()+getHeight(),"bomb",getImageLoader(),fireCounter));
-		}
-		else 
-			fires.add(new Bomb(getPosX()+getWidth()/2,getPosY()+getHeight(),"bomb",getImageLoader(),fireCounter));
-		move();
-	}
-	
-	/**
-	 * This method creates a special bomb for level 2
-	 */
-	public void bomb2() {
-		counter++;
-		if(counter==6) {
-			counter =0;
-			fires.add(new Bomb(getPosX()+getWidth()/2,getPosY()+getHeight(),"bomb",getImageLoader(),fireCounter));
-			fires.add(new Bomb(getPosX()+getWidth()*3/2,getPosY()+getHeight(),"bomb",getImageLoader(),fireCounter));
-			fires.add(new Bomb(getPosX()+getWidth(),getPosY()+getHeight(),"bomb",getImageLoader(),fireCounter));
-			fires.add(new Bomb(getPosX(),getPosY()+getHeight(),"bomb",getImageLoader(),fireCounter));
-		}
-		else if(counter ==4) {
-			fires.add(new Bomb(getPosX()+getWidth()/2,getPosY()+getHeight()*2,"bomb",getImageLoader(),fireCounter));
-			fires.add(new Bomb(getPosX()+getWidth(),getPosY()+getHeight(),"bomb",getImageLoader(),fireCounter));
-			fires.add(new Bomb(getPosX(),getPosY()+getHeight()/2,"bomb",getImageLoader(),fireCounter));
-		}
-		else if(counter ==2) {
-			fires.add(new Bomb(getPosX()+getWidth(),getPosY()+getHeight(),"bomb",getImageLoader(),fireCounter));
-			fires.add(new Bomb(getPosX()+getWidth()*2,getPosY()+getHeight()*2,"bomb",getImageLoader(),fireCounter));
-			fires.add(new Bomb(getPosX()+getWidth()/2,getPosY()+getHeight()/2,"bomb",getImageLoader(),fireCounter));
-			fires.add(new Bomb(getPosX()+getWidth()*3/2,getPosY()+getHeight()*3/2,"bomb",getImageLoader(),fireCounter));
-		}
-		else {
-			fires.add(new Bomb(getPosX()+getWidth()/2,getPosY()+getHeight(),"bomb",getImageLoader(),fireCounter));
-			fires.add(new Bomb(getPosX()+getWidth(),getPosY()+getHeight()*3/2,"bomb",getImageLoader(),fireCounter));
-			fires.add(new Bomb(getPosX(),getPosY()+getHeight()*3/2,"bomb",getImageLoader(),fireCounter));
-			fires.add(new Bomb(getPosX()+getWidth()/2,getPosY()+getHeight()*2,"bomb",getImageLoader(),fireCounter));
-		}
-	}
+
 	
 	/**
 	 * It moves the enemy, for level 2
@@ -266,12 +188,6 @@ public class Enemy extends Sprite {
 			targetX = r.nextInt(xMax-getWidth());
 	}
 	
-	/**
-	 * It changes the speed of the enemy
-	 */
-	public void increaseSpeed() {
-		speed = SPEEDX2;
-	}
 	
 	/**
 	 * It returns a list of all the fires shot by the wizard
@@ -279,6 +195,14 @@ public class Enemy extends Sprite {
 	 */
 	public ArrayList<Fire> getFires(){
 		return fires;
+	}
+	
+	public int getXMax() {
+		return xMax;
+	}
+	
+	public void setLife(int newLife) {
+		life = newLife;
 	}
 
 }

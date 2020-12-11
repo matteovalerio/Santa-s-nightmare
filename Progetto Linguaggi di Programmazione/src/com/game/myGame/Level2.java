@@ -36,7 +36,7 @@ public class Level2 extends Level implements Runnable{
 	private Thread animator;
 	private boolean isPaused;
 	private Santa santa;
-	private Enemy wizard;
+	private GhostShip wizard;
 	
 	/**
 	 * Public constructor
@@ -215,7 +215,7 @@ public class Level2 extends Level implements Runnable{
 	 * Initialize the characters
 	 */
 	private void initCharacters() {
-		wizard = new Enemy(getFrame().getWidth()/2, background.getHeight()*4/7, "evilShip", getFrame().getImageLoader(),getFrame().getWidth(),2);
+		wizard = new GhostShip(getFrame().getWidth()/2, background.getHeight()*4/7, "evilShip", getFrame().getImageLoader(),getFrame().getWidth(),2);
 		santa = new Santa(0, getFrame().getHeight(), "sub", getFrame().getImageLoader(), getFrame().getWidth(), getName());
 		
 		santa.setYMax(getFrame().getHeight());
@@ -228,7 +228,7 @@ public class Level2 extends Level implements Runnable{
 	@Override
 	public void run() {
 		//start scene
-		startRender();
+		/*startRender();
 		paintScreen();
 		getFrame().getAudioEffects().startSound("evilYou");
 		try {
@@ -244,7 +244,7 @@ public class Level2 extends Level implements Runnable{
 			Thread.sleep(LEVEL_DELAY);
 		} catch(InterruptedException e) {
 			e.printStackTrace();
-		}
+		}*/
 		running = true;
 		startTime = System.currentTimeMillis();
 		getFrame().getAudioManager().playLoop("level2");
@@ -360,7 +360,7 @@ public class Level2 extends Level implements Runnable{
 			}//for
 		}//if
 		
-		ArrayList<Fire> f = wizard.getFires();
+		ArrayList<Bomb> f = wizard.getBombs();
 		if(f!=null) {
 			for(int i = 0;i<f.size();i++) {
 				if(f.get(i).getPosX()>getWidth() || !(f.get(i).isVisible())) {
@@ -390,8 +390,7 @@ public class Level2 extends Level implements Runnable{
 					e.printStackTrace();
 				}
 				//and go to the next Level
-				//TODO uncomment when creates the level3
-				//getFrame().nextLevel("level 3");
+				getFrame().nextLevel("level 3");
 				
 			}
 			else {
@@ -478,7 +477,7 @@ public class Level2 extends Level implements Runnable{
 		Rectangle eR = wizard.getMyRectangle();
 		Rectangle pR,fR;
 		ArrayList<Present> present = santa.getPresents();
-		ArrayList<Fire> fires = wizard.getFires();
+		ArrayList<Bomb> fires = wizard.getBombs();
 		
 		Fire f;
 		Present p;

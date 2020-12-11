@@ -106,7 +106,7 @@ public class GameFrame extends JFrame {
 		nameList.add(name);
 		
 		name="fly";
-		imgList = imgL.loadSheetImages("res/img/santa/"+name, 1);
+		imgList = imgL.loadSheetImages("res/img/santa/"+name, 2);
 		imgL.insertImages(name, imgList);
 		nameList.add(name);
 		
@@ -124,7 +124,7 @@ public class GameFrame extends JFrame {
 		nameList.add(name);
 		
 		name="skull";
-		imgList = imgL.loadSheetImages("res/img/evil wizard/"+name, 1);
+		imgList = imgL.loadSheetImages("res/img/evil wizard/"+name, 3);
 		imgL.insertImages(name, imgList);
 		nameList.add(name);
 		

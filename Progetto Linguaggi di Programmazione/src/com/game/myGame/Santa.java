@@ -105,6 +105,12 @@ public class Santa extends Sprite {
 			setDy(0);
 	}
 	
+	public void flyUp(boolean rightDirection) {
+		super.moveUp(rightDirection);
+		if(getPosY()<getHeight())
+			setDy(0);
+	}
+	
 	/**
 	 *  Just for level 2. Moves down the sprite
 	 */
