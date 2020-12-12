@@ -4,9 +4,14 @@ public class SpecialFire extends Fire {
 
 	private int targetX;
 	private int targetY;
+	private final int XSTEP =1;
+	private final int FAST = 5;
+	private final int SPEEDX = 40;
+	private int speed;
 	
 	public SpecialFire(int posX, int posY, String name, ImageLoader imgL, int count) {
 		super(posX, posY, name, imgL, count);
+		speed = XSTEP;
 	}
 
 	/**
@@ -19,27 +24,41 @@ public class SpecialFire extends Fire {
 		targetY=y;
 	}
 	
-	public void move(int x, int y) {
+	public void move() {
 		int posX = getPosX();
 		int posY = getPosY();
 		
-		if(x>posX)
-			setDx(-XSTEP);	//go right
-		else if(x<posX)
-			setDx(XSTEP); //go left
-		else
-			setDx(0); //don't change
+		int dx,dy;
 		
-		if(y>posY)
-			setDy(-YSTEP); //go up
-		else if(y<posY)
-			setDy(YSTEP); //go down
+		if(targetX>posX)
+			dx=speed;	//go right
+		else if(targetX<posX)
+			dx=-speed; //go left
 		else
-			setDy(0);
+			dx=0; //don't change
+		
+		if(targetY>posY)
+			dy=speed; //go down
+		else if(targetY<posY)
+			dy=-speed; //go up
+		else
+			dy=0;
+		setPosX(posX+dx);
+		setPosY(posY+dy);
 	}
 	
 	public void blast() {
 		//cambia immagine e mettila tutta verticale
+		setPosX(getPosX()+SPEEDX*2);
+
+	}
+	
+	public void fast() {
+		speed = FAST;
+	}
+	
+	public void slow() {
+		speed = XSTEP;
 	}
 	
 	

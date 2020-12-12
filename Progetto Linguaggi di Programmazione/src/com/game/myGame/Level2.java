@@ -137,7 +137,7 @@ public class Level2 extends Level implements Runnable{
 		});
 		
 		addKeyBinding(this, KeyEvent.VK_S, "special", false, (evt)->{
-			if(santa.specialShootAvailable()) {
+			if(santa.specialMissileAvailable()) {
 				getFrame().getAudioEffects().startSound("shoot");
 				santa.specialMissile();
 			}				
@@ -228,7 +228,7 @@ public class Level2 extends Level implements Runnable{
 	@Override
 	public void run() {
 		//start scene
-		/*startRender();
+		startRender();
 		paintScreen();
 		getFrame().getAudioEffects().startSound("evilYou");
 		try {
@@ -244,7 +244,7 @@ public class Level2 extends Level implements Runnable{
 			Thread.sleep(LEVEL_DELAY);
 		} catch(InterruptedException e) {
 			e.printStackTrace();
-		}*/
+		}
 		running = true;
 		startTime = System.currentTimeMillis();
 		getFrame().getAudioManager().playLoop("level2");
@@ -287,7 +287,7 @@ public class Level2 extends Level implements Runnable{
 		dbg.setBackground(Color.BLACK);
 		dbg.setColor(Color.WHITE);
 		int x = 0;
-		int y = getHeight()/6;
+		int y = getFrame().getHeight()/6;
 		dbg.setColor(Color.RED);
 		dbg.drawString("Dear Santa...", x, y);
 		x = getWidth()/4;
@@ -302,7 +302,7 @@ public class Level2 extends Level implements Runnable{
 		y = getHeight()*4/5;
 		dbg.setColor(Color.RED);
 		dbg.setFont(new Font("French Script MT", Font.BOLD,50));
-		dbg.drawString("A Kid?", x, y);
+		dbg.drawString("A very bad kid", x, y);
 		
 		
 		
@@ -343,7 +343,7 @@ public class Level2 extends Level implements Runnable{
 		
 		//check if santa has special shoots 
 		//if so it display an icon on the screen
-		if(santa.specialShootAvailable()) {
+		if(santa.specialMissileAvailable()) {
 			BufferedImage temp = getFrame().getImageLoader().getImage("specialPresent");
 			dbg.drawImage(temp,getWidth()*3/4, 120, 25 , 25, this);
 		}

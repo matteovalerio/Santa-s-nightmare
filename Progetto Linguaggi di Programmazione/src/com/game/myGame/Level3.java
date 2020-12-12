@@ -223,7 +223,7 @@ public class Level3 extends Level implements Runnable{
 	@Override
 	public void run() {
 		//start scene
-	/*	startRender();
+/*		startRender();
 		paintScreen();
 		getFrame().getAudioEffects().startSound("evilHell");
 		try {
@@ -359,11 +359,12 @@ public class Level3 extends Level implements Runnable{
 		ArrayList<SpecialFire> f = wizard.getSpecialFires();
 		if(f!=null) {
 			for(int i = 0;i<f.size();i++) {
-				if(f.get(i).getPosX()>getWidth() || !(f.get(i).isVisible())) {
+				if(f.get(i).getPosX()<=0 || !(f.get(i).isVisible())) {
 					f.remove(i);
 				}
-				else
+				else {
 					f.get(i).paintSprite(dbg);
+				}
 			}//for
 		}
 		
@@ -476,13 +477,13 @@ public class Level3 extends Level implements Runnable{
 		ArrayList<Present> present = santa.getPresents();
 		ArrayList<SpecialFire> fires = wizard.getSpecialFires();
 		
-		Fire f;
+		SpecialFire f;
 		Present p;
 		//fires/santa
 		for(int i =0;i<fires.size();i++) {
 			f = fires.get(i);
 			fR = f.getMyRectangle();
-			if(fR.intersects(sR)) {
+			if(fR.intersects(sR) && f.isVisible()) {
 				int life = santa.getHit(f.getDamage());
 				getFrame().getAudioEffects().startSound("santaGrunt");
 				if(life<=0) {

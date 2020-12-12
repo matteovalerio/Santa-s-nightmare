@@ -96,7 +96,6 @@ public class Sprite {
 	public void startLooping(int animPeriod, double seqDuration) {
 		
 		if(imgL.numImages(name) > 1) {
-			//imgP = null;
 			imgP = new ImagePlayer(name, animPeriod, seqDuration, true, imgL);
 			
 			isLooping = true;
@@ -202,10 +201,18 @@ public class Sprite {
 	 */
 	public void run(boolean rightDirection) {
 		this.rightDirection = rightDirection;
-		if(rightDirection)
-			dx = XSTEP*2;
-		else
-			dx = -XSTEP*2;
+		if(dx!=0) {
+			if(rightDirection)
+				dx = XSTEP*2;
+			else
+				dx = -XSTEP*2;
+		}
+		if(dy!=0) {
+			if(dy>0)
+				dy = YSTEP*2;
+			else
+				dy = -YSTEP*2;
+		}
 	}
 	
 	

@@ -115,6 +115,10 @@ public class GhostShip extends Enemy {
 			targetX = r.nextInt(xMax-getWidth());
 	}
 	
+	/**
+	 * 
+	 * @return the list of bombs
+	 */
 	public ArrayList<Bomb> getBombs(){
 		return bombs;
 	}

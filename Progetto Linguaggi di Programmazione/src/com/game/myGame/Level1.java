@@ -286,7 +286,7 @@ public class Level1 extends Level implements Runnable {
 		dbg.setBackground(Color.BLACK);
 		dbg.setColor(Color.WHITE);
 		int x = 0;
-		int y = getHeight()/6;
+		int y = getFrame().getHeight()/6;
 		dbg.setColor(Color.RED);
 		dbg.drawString("Dear Santa...", x, y);
 		x = getWidth()/4;
@@ -356,8 +356,8 @@ public class Level1 extends Level implements Runnable {
 		
 		if(santa.specialShootAvailable()) {
 			BufferedImage temp = getFrame().getImageLoader().getImage("specialPresent");
-			dbg.drawImage(temp,getWidth()*2/5, 120, temp.getWidth()*2 , temp.getHeight()*2, this);
-		}
+			dbg.drawImage(temp,getWidth()*2/5, 120, 25 , 25, this);		
+			}
 		
 
 		

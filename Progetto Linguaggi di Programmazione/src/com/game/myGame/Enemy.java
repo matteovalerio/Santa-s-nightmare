@@ -68,7 +68,7 @@ public class Enemy extends Sprite {
 		setPosY(posY-getHeight());
 		setPosX(getPosX()-getWidth());
 
-
+		startTimer();
 		//starting a timer: each DELAY a new fire is created
 //		startTimer(level);
 	}//constructor
