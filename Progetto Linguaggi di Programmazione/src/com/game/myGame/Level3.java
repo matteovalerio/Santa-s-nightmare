@@ -223,7 +223,7 @@ public class Level3 extends Level implements Runnable{
 	@Override
 	public void run() {
 		//start scene
-/*		startRender();
+		startRender();
 		paintScreen();
 		getFrame().getAudioEffects().startSound("evilHell");
 		try {
@@ -239,7 +239,7 @@ public class Level3 extends Level implements Runnable{
 			Thread.sleep(LEVEL_DELAY);
 		} catch(InterruptedException e) {
 			e.printStackTrace();
-		}*/
+		}
 		running = true;
 		startTime = System.currentTimeMillis();
 		getFrame().getAudioManager().playLoop("level3");
