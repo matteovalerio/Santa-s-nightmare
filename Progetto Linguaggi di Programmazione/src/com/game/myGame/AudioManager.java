@@ -23,8 +23,9 @@ public class AudioManager {
 
 	private AudioInputStream input;
 	private AudioFormat format;
-	private String [] urlFile = {"res/sounds/MainTitle.wav","res/sounds/Level1.wav","res/sounds/ocean.wav","res/sounds/final.wav"} ;
-	private String [] names = {"menu","level1","level2","level3"};
+	private String [] urlFile = {"res/sounds/MainTitle.wav","res/sounds/Level1.wav","res/sounds/ocean.wav","res/sounds/final.wav","res/sounds/endMusic.wav",
+			"res/sounds/level win2.wav","res/sounds/level win.wav"} ;
+	private String [] names = {"menu","level1","level2","level3","victory","levelWin2","levelWin"};
 	private File [] file = new File[urlFile.length];
 	private DataLine.Info info;
 	//private Clip [] audioClip = new Clip[urlFile.length];

@@ -206,7 +206,7 @@ public class Santa extends Sprite {
 	 * @return True if there is a special missile available. Only level2.
 	 */
 	public boolean specialMissileAvailable() {
-		specialMissile = hitCounter>5;
+		specialMissile = hitCounter>3;
 		return specialMissile;
 	}
 
@@ -235,7 +235,7 @@ public class Santa extends Sprite {
 	 * @return True if available
 	 */
 	public boolean specialShootAvailable() {
-		return hitCounter>10;
+		return hitCounter>5;
 	}
 	
 	/**

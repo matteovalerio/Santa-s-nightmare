@@ -68,15 +68,11 @@ public class Enemy extends Sprite {
 		setPosY(posY-getHeight());
 		setPosX(getPosX()-getWidth());
 
-		startTimer();
-		//starting a timer: each DELAY a new fire is created
-//		startTimer(level);
 	}//constructor
 	
 	
 	/**
 	 * It starts the timer and activate some attacks, depending on the level
-	 * @param level The level
 	 */
 	public void startTimer() {
 		fire();
@@ -170,7 +166,6 @@ public class Enemy extends Sprite {
 			fires.add(new Fire(getPosX(),getPosY()+getHeight(),"fire",getImageLoader(), FIRE1));
 			fires.add(new Fire(rdm,getHeight()*3/5,"fire",getImageLoader(), fireCounter));
 		}
-		
 	}
 	
 

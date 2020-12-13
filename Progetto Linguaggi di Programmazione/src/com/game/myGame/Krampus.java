@@ -11,9 +11,9 @@ public class Krampus extends Enemy {
 
 	private Timer timer;
 	private int startingLife = LEVEL3;
-	private final int YSTEP =1;
+	private final int YSTEP =4;
 	private final int FIRE3 = 3;
-	private final int DELAY2 = 5000;
+	private final int DELAY2 = 800;
 	private int xTarget;
 	private int yTarget;
 	
@@ -24,7 +24,6 @@ public class Krampus extends Enemy {
 		super(posX, posY, name, imgL, xMax, level);
 		setImage("skull");
 		fireCounter = FIRE1;
-		startTimer();
 	}
 
 	public void startTimer() {
@@ -58,22 +57,24 @@ public class Krampus extends Enemy {
 	private void finalAttack3() {
 		counter = fires.size();
 		if(counter<2) {
-			SpecialFire f = new SpecialFire(getPosX()-getWidth(), getPosY(), "fire", getImageLoader(), fireCounter);
-			f.setImage("blast");
-			int height= f.getHeight();
-			f.setImageDimension(new Dimension(height,getXMax()));
+			SpecialFire f = new SpecialFire(getPosX(), getPosY(), "fire", getImageLoader(), fireCounter);
+			f.laser();
 			fires.add(f);
-			f.blast();
 		}
 	}
 	
 	
 	private void finalAttack2() {
-		SpecialFire f = new SpecialFire(getPosX()-getWidth(), getPosY(), "fire", getImageLoader(), fireCounter);
-		f.slow();
-		fires.add(f);
-		f.move();
-		
+		counter++;
+		if(counter<6) 
+			fires.add(new SpecialFire(getPosX()-getWidth(), getPosY(), "fire", getImageLoader(), fireCounter));
+		else {
+			SpecialFire f = new SpecialFire(getPosX()-getWidth(), getPosY(), "fire", getImageLoader(), FIRE1);
+			f.setTarget(xTarget, yTarget);
+			fires.add(f);
+			counter = 0;
+		}
+			
 	}
 	
 	
@@ -82,24 +83,23 @@ public class Krampus extends Enemy {
 		if(counter==6) {
 			counter=0;
 			fires.add(new SpecialFire(getPosX()-getWidth()*2,getPosY()-getHeight(),"fire",getImageLoader(), fireCounter));
-			fires.add(new SpecialFire(getPosX()-getWidth()*2,getPosY()+getHeight()*2,"fire",getImageLoader(), fireCounter));
-			fires.add(new SpecialFire(getPosX()-getWidth()*2,getPosY()+getHeight()*2/3,"fire",getImageLoader(), fireCounter));
+			fires.add(new SpecialFire(getPosX()-getWidth()*2,getPosY()+getHeight(),"fire",getImageLoader(), fireCounter));
+			fires.add(new SpecialFire(getPosX()-getWidth()*2,getPosY(),"fire",getImageLoader(), fireCounter));
 		}
 		else if(counter==4) {
-			fires.add(new SpecialFire(getPosX()-getWidth()*2,getPosY()-getHeight()/2,"fire",getImageLoader(), fireCounter));
-			fires.add(new SpecialFire(getPosX()-getWidth()*1/2,getPosY()-getHeight()/2,"fire",getImageLoader(), fireCounter));
-			fires.add(new SpecialFire(getPosX()-getWidth(),getPosY()-getHeight()/2,"fire",getImageLoader(), fireCounter));
+			fires.add(new SpecialFire(getPosX()-getWidth()*2,getPosY()+getHeight()/2,"fire",getImageLoader(), fireCounter));
+			fires.add(new SpecialFire(getPosX()-getWidth()*1/2,getPosY()+getHeight()/2,"fire",getImageLoader(), fireCounter));
+			fires.add(new SpecialFire(getPosX()-getWidth(),getPosY()+getHeight()/2,"fire",getImageLoader(), fireCounter));
 		}
 		else if(counter==2) {
-			fires.add(new SpecialFire(getPosX()-getWidth(),getPosY()-getHeight(),"fire",getImageLoader(), fireCounter));
-			fires.add(new SpecialFire(getPosX()-getWidth(),getPosY()-getHeight()*2,"fire",getImageLoader(), fireCounter));
+			fires.add(new SpecialFire(getPosX()-getWidth(),getPosY()+getHeight()*3/2,"fire",getImageLoader(), fireCounter));
+			fires.add(new SpecialFire(getPosX()-getWidth(),getPosY()+getHeight()*1/2,"fire",getImageLoader(), fireCounter));
 			fires.add(new SpecialFire(getPosX()-getWidth(),getPosY()+getHeight(),"fire",getImageLoader(), fireCounter));
 			fires.add(new SpecialFire(getPosX()-getWidth(),getPosY()+getHeight()*2,"fire",getImageLoader(), fireCounter));
 		}
 		else {
-			fires.add(new SpecialFire(getPosX()-getWidth(),getPosY()-getHeight(),"fire",getImageLoader(), fireCounter));
+			fires.add(new SpecialFire(getPosX()-getWidth(),getPosY()+getHeight(),"fire",getImageLoader(), fireCounter));
 		}
-		
 
 	}
 	
@@ -113,7 +113,6 @@ public class Krampus extends Enemy {
 			setLife(getLife()-damage);
 		int life = getLifePercent();
 		if(life<=66) {
-			System.out.println(life + " " + startingLife/3);
 			timer.setDelay(DELAY2);
 			fireCounter =FIRE2;
 		}
@@ -131,9 +130,9 @@ public class Krampus extends Enemy {
 	
 	public void move() {
 		int y = getPosY();
-		if(yTarget>y)
+		if(yTarget>y && yTarget-y>YSTEP)
 			setDy(YSTEP);
-		else if(yTarget<y)
+		else if(yTarget<y && y-yTarget>YSTEP)
 			setDy(-YSTEP);
 		else
 			setDy(0);
@@ -142,7 +141,7 @@ public class Krampus extends Enemy {
 				s.slow();
 				s.setTarget(xTarget, yTarget);
 			}
-			else {
+			else if(fireCounter == FIRE1 ||fireCounter==FIRE3){
 				s.setTarget(-s.getWidth(), s.getPosY());
 				s.fast();
 			}

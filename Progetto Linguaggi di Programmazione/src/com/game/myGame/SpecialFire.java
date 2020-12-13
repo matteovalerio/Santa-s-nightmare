@@ -1,11 +1,13 @@
 package com.game.myGame;
 
+import java.awt.Dimension;
+
 public class SpecialFire extends Fire {
 
 	private int targetX;
 	private int targetY;
 	private final int XSTEP =1;
-	private final int FAST = 5;
+	private final int FAST = 8;
 	private final int SPEEDX = 40;
 	private int speed;
 	
@@ -47,9 +49,38 @@ public class SpecialFire extends Fire {
 		setPosY(posY+dy);
 	}
 	
-	public void blast() {
+	/**
+	 * get the current movement based on a counter
+	 * @param counter The counter
+	 */
+	public void currentMovement(int counter) {
+		switch (counter) {
+			case 1: {
+				move();
+				break;
+			}
+			
+			case 2:{
+				fast();
+				move2();
+				break;
+			}
+		}
+	}
+	
+	public void move2() {
+		int posX = getPosX();
+		setPosX(posX-speed);
+	}
+	
+	public void laser() {
 		//cambia immagine e mettila tutta verticale
-		setPosX(getPosX()+SPEEDX*2);
+		setImage("laser");
+		setImageDimension(new Dimension(300,50));
+		int x = getPosX();
+		x -= getWidth();
+		setPosX(x);
+		fast();
 
 	}
 	

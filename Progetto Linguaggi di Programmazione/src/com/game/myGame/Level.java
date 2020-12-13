@@ -24,8 +24,8 @@ public class Level extends JPanel {
 	
 	public static final int DELAY = 20;
 	
-	public static final int START_DELAY = 6000; // 6 seconds,in ms
-	public static final int LEVEL_DELAY = 4000;
+	public static final int START_DELAY = 4000; // 6 seconds,in ms
+	public static final int LEVEL_DELAY = 2000;
 	
 	public static final int ANIM_PERIOD = 400;
 	public static final double SEQ_DURATION = 4;

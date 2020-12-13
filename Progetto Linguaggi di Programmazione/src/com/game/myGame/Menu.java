@@ -75,7 +75,7 @@ public class Menu extends Level {
 			if(isMenu) {	
 				effects.startSound("menu");
 				if(selected==0) {
-					getFrame().nextLevel("level 1");
+					getFrame().nextLevel("level 3");
 					//getFrame().nextLevel("level 3");
 					getFrame().getAudioManager().stopLoop(getName());
 				}
@@ -84,6 +84,7 @@ public class Menu extends Level {
 				else if(selected==2) {
 					getFrame().dispose();
 					getFrame().getAudioManager().stopLoop(getName());
+					System.exit(0);
 				}
 
 			}

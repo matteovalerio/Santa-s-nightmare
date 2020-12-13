@@ -23,7 +23,6 @@ public class GhostShip extends Enemy {
 		super(posX, posY, name, imgL, xMax, level);
 		this.xMax = getXMax();
 		speed = SPEEDX1;
-		startTimer();
 		}
 
 	public void startTimer() {
@@ -79,24 +78,24 @@ public class GhostShip extends Enemy {
 		if(counter==6) {
 			counter =0;
 			bombs.add(new Bomb(getPosX()+getWidth()/2,getPosY()+getHeight(),"bomb",getImageLoader(),fireCounter));
-			bombs.add(new Bomb(getPosX()+getWidth()*3/2,getPosY()+getHeight(),"bomb",getImageLoader(),fireCounter));
+		//	bombs.add(new Bomb(getPosX()+getWidth()*3/2,getPosY()+getHeight(),"bomb",getImageLoader(),fireCounter));
 			bombs.add(new Bomb(getPosX()+getWidth(),getPosY()+getHeight(),"bomb",getImageLoader(),fireCounter));
 			bombs.add(new Bomb(getPosX(),getPosY()+getHeight(),"bomb",getImageLoader(),fireCounter));
 		}
 		else if(counter ==4) {
 			bombs.add(new Bomb(getPosX()+getWidth()/2,getPosY()+getHeight()*2,"bomb",getImageLoader(),fireCounter));
-			bombs.add(new Bomb(getPosX()+getWidth(),getPosY()+getHeight(),"bomb",getImageLoader(),fireCounter));
+			//bombs.add(new Bomb(getPosX()+getWidth(),getPosY()+getHeight(),"bomb",getImageLoader(),fireCounter));
 			bombs.add(new Bomb(getPosX(),getPosY()+getHeight()/2,"bomb",getImageLoader(),fireCounter));
 		}
 		else if(counter ==2) {
 			bombs.add(new Bomb(getPosX()+getWidth(),getPosY()+getHeight(),"bomb",getImageLoader(),fireCounter));
-			bombs.add(new Bomb(getPosX()+getWidth()*2,getPosY()+getHeight()*2,"bomb",getImageLoader(),fireCounter));
+			//bombs.add(new Bomb(getPosX()+getWidth()*2,getPosY()+getHeight()*2,"bomb",getImageLoader(),fireCounter));
 			bombs.add(new Bomb(getPosX()+getWidth()/2,getPosY()+getHeight()/2,"bomb",getImageLoader(),fireCounter));
 			bombs.add(new Bomb(getPosX()+getWidth()*3/2,getPosY()+getHeight()*3/2,"bomb",getImageLoader(),fireCounter));
 		}
 		else {
 			bombs.add(new Bomb(getPosX()+getWidth()/2,getPosY()+getHeight(),"bomb",getImageLoader(),fireCounter));
-			bombs.add(new Bomb(getPosX()+getWidth(),getPosY()+getHeight()*3/2,"bomb",getImageLoader(),fireCounter));
+		//	bombs.add(new Bomb(getPosX()+getWidth(),getPosY()+getHeight()*3/2,"bomb",getImageLoader(),fireCounter));
 			bombs.add(new Bomb(getPosX(),getPosY()+getHeight()*3/2,"bomb",getImageLoader(),fireCounter));
 			bombs.add(new Bomb(getPosX()+getWidth()/2,getPosY()+getHeight()*2,"bomb",getImageLoader(),fireCounter));
 		}

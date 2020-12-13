@@ -22,8 +22,8 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 public class AudioEffects {
 	
 	private String [] url = {"res/sounds/floop2_x.wav", "res/sounds/shoot.wav", "res/sounds/evil spell.wav", "res/sounds/grunt.wav", "res/sounds/explosion.wav",
-			"res/sounds/evilLaugh.wav","res/sounds/game over.wav","res/sounds/level win.wav","res/sounds/evilYou.wav","res/sounds/evilHell.wav" };
-	private String [] names = {"menu","shoot","evilSpell","santaGrunt","evilGrunt","evilLaugh","gameOver","levelWin","evilYou","evilHell"};
+			"res/sounds/evilLaugh.wav","res/sounds/game over.wav","res/sounds/evilYou.wav","res/sounds/evilHell.wav" };
+	private String [] names = {"menu","shoot","evilSpell","santaGrunt","evilGrunt","evilLaugh","gameOver","evilYou","evilHell"};
 	private File file;
 	private AudioInputStream input;
 	private DataLine.Info info;

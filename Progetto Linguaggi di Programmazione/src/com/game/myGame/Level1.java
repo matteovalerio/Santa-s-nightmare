@@ -264,6 +264,7 @@ public class Level1 extends Level implements Runnable {
 	private void initCharacters() {
 		wizard = new Enemy(getFrame().getWidth(), getFrame().getHeight(), "eStand", getFrame().getImageLoader(),getFrame().getWidth(),1);
 		santa = new Santa(0, getFrame().getHeight(), "stand", getFrame().getImageLoader(), getFrame().getWidth()-(wizard.getWidth()*2), getName());
+		wizard.startTimer();
 	}
 	
 	/**
@@ -389,30 +390,16 @@ public class Level1 extends Level implements Runnable {
 		if(gameOver) {
 			getFrame().getAudioManager().stopLoop("level1");
 			if(santa.getLife()>0) {
+				getFrame().getAudioManager().playSound("levelWin");
 				gameOverMessage(dbg,"you win");
-				
-				
-				getFrame().getAudioEffects().startSound("levelWin");
-				try {
-					Thread.sleep(START_DELAY);
-				}
-				catch (InterruptedException e) {
-					e.printStackTrace();
-				}
 				getFrame().nextLevel("level 2");
 				
 			}
 			else {
 				santa.setImage("die");
+				getFrame().getAudioEffects().startSound("gameOver");
 				gameOverMessage(dbg,"you lose");
 
-				getFrame().getAudioEffects().startSound("gameOver");
-				try {
-					Thread.sleep(START_DELAY);
-				}
-				catch (InterruptedException e) {
-					e.printStackTrace();
-				}
 				getFrame().nextLevel("menu");
 
 			}
@@ -435,12 +422,44 @@ public class Level1 extends Level implements Runnable {
 		dbg2.setFont(new Font(font,Font.BOLD,70));
 
 
-		dbg.setColor(Color.RED);
-		dbg.drawString(msg, x, y);
-
-
-		
+		dbg2.setColor(Color.RED);
+		dbg2.drawString(msg, x, y);
+		if(msg.equals("you win")){
+			BufferedImage img = getFrame().getImageLoader().getImage("victory1");
+			dbg2.drawImage(img,x+100,y,400,400,this);
+			paintScreen();
+			try {
+				Thread.sleep(LEVEL_DELAY);
+			}
+			catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			
+	
+			dbg2.setColor(Color.BLACK);
+			dbg2.fillRect(0, 0, getFrame().getWidth(), getFrame().getHeight());
+			dbg2.setFont(new Font(font,Font.BOLD,70));
+			dbg2.setBackground(Color.BLACK);
+			
+			dbg2.setColor(Color.RED);
+			getFrame().getAudioManager().playSound("levelWin2");
+			y = getFrame().getHeight()/5;
+			x=getFrame().getWidth()/5;
+			msg = "You found the letters!!";
+			dbg2.drawString(msg, x, y);
+			img = getFrame().getImageLoader().getImage("letters");
+			
+			dbg2.drawImage(img,x+100,y,600,600,this);
+		}
 		paintScreen();
+		
+		try {
+			Thread.sleep(START_DELAY);
+		}
+		catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 

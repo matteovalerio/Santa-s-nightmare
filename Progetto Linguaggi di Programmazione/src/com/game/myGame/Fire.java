@@ -118,4 +118,8 @@ public class Fire extends Sprite {
 	public boolean isVisible() {
 		return isVisible;
 	}
+	
+	public int getCount() {
+		return count;
+	}
 }

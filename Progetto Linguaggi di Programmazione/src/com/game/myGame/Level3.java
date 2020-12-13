@@ -210,10 +210,11 @@ public class Level3 extends Level implements Runnable{
 	 * Initialize the characters
 	 */
 	private void initCharacters() {
-		wizard = new Krampus(getFrame().getWidth(), getFrame().getHeight(), "skull", getFrame().getImageLoader(),getFrame().getWidth(),1);
+		wizard = new Krampus(getFrame().getWidth(), getFrame().getHeight(), "skull", getFrame().getImageLoader(),getFrame().getWidth(),3);
 		santa = new Santa(0, getFrame().getHeight(), "fly", getFrame().getImageLoader(), getFrame().getWidth(), getName());
 		santa.setImageDimension(new Dimension(123,82));
 		santa.setYMax(getFrame().getHeight());
+		wizard.startTimer();
 	}
 	
 	
@@ -374,37 +375,27 @@ public class Level3 extends Level implements Runnable{
 		
 		//if game over, it stops the loop
 		if(gameOver) {
-			getFrame().getAudioManager().stopLoop("level1");
+			getFrame().getAudioManager().stopLoop("level3");
 			if(santa.getLife()>0) {
+				getFrame().getAudioManager().playSound("levelWin");
+
 				gameOverMessage(dbg,"you win");
 				
 				
-				getFrame().getAudioEffects().startSound("levelWin");
-				try {
-					Thread.sleep(START_DELAY);
-				}
-				catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-				//and go to the next Level
-				//TODO uncomment when creates the end
+
+
 				
 			}
 			else {
 				santa.setImage("die");
+				getFrame().getAudioEffects().startSound("gameOver");
 				gameOverMessage(dbg,"you lose");
 
-				getFrame().getAudioEffects().startSound("gameOver");
-				try {
-					Thread.sleep(START_DELAY);
-				}
-				catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-				//and go back to the menu
-				getFrame().nextLevel("menu");
+
 
 			}
+			//and go back to the menu at the end of the game
+			getFrame().nextLevel("menu");
 		}
 		
 	}
@@ -416,24 +407,106 @@ public class Level3 extends Level implements Runnable{
 	 * @param dbg2 The graphics used to paint the message
 	 */
 	private void gameOverMessage(Graphics2D dbg2, String msg) {
-		// TODO Auto-generated method stub
 		
 		//calcola posizione x e y e messaggio msg
 		int x = getFrame().getWidth()*2/5;
 		int y = getFrame().getHeight()/2;
 		
 		
-
 		dbg2.setFont(new Font(font,Font.BOLD,70));
 
 
+		dbg2.setColor(Color.RED);
+		dbg2.drawString(msg, x, y);
+		if(msg.equals("you win")){
+			BufferedImage img = getFrame().getImageLoader().getImage("victory1");
+			dbg2.drawImage(img,x+100,y,400,400,this);
+			paintScreen();
+			try {
+				Thread.sleep(LEVEL_DELAY);
+			}
+			catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			
+			getFrame().getAudioManager().playSound("levelWin2");
 
-		dbg.setColor(Color.RED);
-		dbg.drawString(msg, x, y);
-
+			dbg2.setColor(Color.BLACK);
+			dbg2.fillRect(0, 0, getFrame().getWidth(), getFrame().getHeight());
+			dbg2.setFont(new Font(font,Font.BOLD,70));
+			dbg2.setBackground(Color.BLACK);
+			
+			dbg2.setColor(Color.RED);
+			y = getFrame().getHeight()/5;
+			x=getFrame().getWidth()/5;
+			msg = "You saved the Christmas!";
+			dbg2.drawString(msg, x, y);
+			img = getFrame().getImageLoader().getImage("victory2");
+			
+			dbg2.drawImage(img,x+100,y,600,600,this);
+			
+			x +=600;
+			y += 600;
+			dbg2.setColor(Color.WHITE);
+			dbg2.setFont(new Font("French Script MT", Font.BOLD,50));
+			dbg2.drawString("Santa Claus", x, y);
+		}
+		paintScreen();
+		
+		try {
+			Thread.sleep(START_DELAY);
+		}
+		catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		getFrame().getAudioManager().playLoop("victory");
+		credits(dbg2);
+		getFrame().getAudioManager().stopLoop("victory");
 
 		
+	}
+	
+	private void credits(Graphics2D dbg2) {
+		String [] credits = {"all the resources used are free of use","ideated, designed, created, realised" , "by Matteo Valerio"};
+		int y = getFrame().getHeight();
+		int yMax = y;
+		int x = getFrame().getWidth()/5;
+		int counter = 0;
+		int set =0;
+		while(counter<yMax) {
+			paintScreen();
+			dbg2.setColor(Color.BLACK);
+			dbg2.fillRect(0, 0, getFrame().getWidth(), getFrame().getHeight());
+			dbg2.setFont(new Font(font,Font.BOLD,70));
+			dbg2.setBackground(Color.BLACK);
+			dbg2.setColor(Color.WHITE);
+			for(int i =0;i<credits.length;i++)			
+				dbg2.drawString(credits[i], x, (y+y*i/2)-set);
+			set+=2;
+			counter++;
+
+			try {
+				Thread.sleep(DELAY);
+			}
+			catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		dbg2.setColor(Color.BLACK);
+		dbg2.fillRect(0, 0, getFrame().getWidth(), getFrame().getHeight());
+		dbg2.setFont(new Font(font,Font.BOLD,70));
+		dbg2.setBackground(Color.BLACK);
+		dbg2.setColor(Color.RED);
+		x = getFrame().getWidth()*2/3;
+		y = getFrame().getHeight()*2/3;
+		dbg2.drawString("MERRY CHRISTMAS",x,y);
 		paintScreen();
+		try {
+			Thread.sleep(START_DELAY+LEVEL_DELAY);
+		}
+		catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**

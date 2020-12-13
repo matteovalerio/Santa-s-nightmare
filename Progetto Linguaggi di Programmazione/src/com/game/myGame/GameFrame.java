@@ -128,6 +128,12 @@ public class GameFrame extends JFrame {
 		imgL.insertImages(name, imgList);
 		nameList.add(name);
 		
+		name="dead";
+		imgList = new ArrayList<BufferedImage>();
+		imgList.add(imgL.loadImage("res/img/explosion1.png"));
+		imgL.insertImages(name, imgList);
+		nameList.add(name);
+		
 		
 		imgL.linkName("evil wizard", nameList);
 		
@@ -147,6 +153,10 @@ public class GameFrame extends JFrame {
 		imgL.insertImages(name, imgList);
 		nameList.add(name);
 		
+		name="laser";
+		imgList = imgL.loadSheetImages("res/img/"+name, 1);
+		imgL.insertImages(name, imgList);
+		nameList.add(name);
 		
 		imgL.linkName("fire", nameList);
 		
@@ -187,8 +197,30 @@ public class GameFrame extends JFrame {
 		imgList.add(imgL.loadImage("res/img/background level3.jpg"));
 		imgL.insertImages(name, imgList);
 		nameList.add(name);
+
+		name="letters";
+		imgList = new ArrayList<BufferedImage>();
+		imgList.add(imgL.loadImage("res/img/letters.png"));
+		imgL.insertImages(name, imgList);
+		nameList.add(name);
+
+		name="bag of presents";
+		imgList = new ArrayList<BufferedImage>();
+		imgList.add(imgL.loadImage("res/img/present.png"));
+		imgL.insertImages(name, imgList);
+		nameList.add(name);
 		
+		name="victory1";
+		imgList = new ArrayList<BufferedImage>();
+		imgList.add(imgL.loadImage("res/img/victory1.png"));
+		imgL.insertImages(name, imgList);
+		nameList.add(name);
 		
+		name="victory2";
+		imgList = new ArrayList<BufferedImage>();
+		imgList.add(imgL.loadImage("res/img/victory2.png"));
+		imgL.insertImages(name, imgList);
+		nameList.add(name);
 	}
 
 
