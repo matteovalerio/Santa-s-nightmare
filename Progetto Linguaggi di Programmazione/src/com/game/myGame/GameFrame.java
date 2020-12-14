@@ -66,47 +66,47 @@ public class GameFrame extends JFrame {
 		
 		// loading santa img 
 		String name = "die";
-		imgList = imgL.loadSheetImages("res/img/santa/"+name, 6);
+		imgList = imgL.loadSheetImages("img/santa/"+name, 6);
 		imgL.insertImages(name, imgList);
 		nameList.add(name);
 		
 		name="punch";
-		imgList = imgL.loadSheetImages("res/img/santa/"+name, 5);
+		imgList = imgL.loadSheetImages("img/santa/"+name, 5);
 		imgL.insertImages(name, imgList);
 		nameList.add(name);
 		
 		name="run";
-		imgList = imgL.loadSheetImages("res/img/santa/"+name, 6);
+		imgList = imgL.loadSheetImages("img/santa/"+name, 6);
 		imgL.insertImages(name, imgList);
 		nameList.add(name);
 		
 		name="shoot";
-		imgList = imgL.loadSheetImages("res/img/santa/"+name, 5);
+		imgList = imgL.loadSheetImages("img/santa/"+name, 5);
 		imgL.insertImages(name, imgList);
 		nameList.add(name);
 		
 		name="stand";
-		imgList = imgL.loadSheetImages("res/img/santa/"+name, 1);
+		imgList = imgL.loadSheetImages("img/santa/"+name, 1);
 		imgL.insertImages(name, imgList);
 		nameList.add(name);
 		
 		name="down";
-		imgList = imgL.loadSheetImages("res/img/santa/"+name, 1);
+		imgList = imgL.loadSheetImages("img/santa/"+name, 1);
 		imgL.insertImages(name, imgList);
 		nameList.add(name);
 		
 		name="sub";
-		imgList = imgL.loadSheetImages("res/img/santa/"+name, 4);
+		imgList = imgL.loadSheetImages("img/santa/"+name, 4);
 		imgL.insertImages(name, imgList);
 		nameList.add(name);
 		
 		name="explosion";
-		imgList = imgL.loadSheetImages("res/img/"+name, 1);
+		imgList = imgL.loadSheetImages("img/"+name, 1);
 		imgL.insertImages(name, imgList);
 		nameList.add(name);
 		
 		name="fly";
-		imgList = imgL.loadSheetImages("res/img/santa/"+name, 2);
+		imgList = imgL.loadSheetImages("img/santa/"+name, 2);
 		imgL.insertImages(name, imgList);
 		nameList.add(name);
 		
@@ -114,23 +114,23 @@ public class GameFrame extends JFrame {
 		
 		//loading evil wizard img
 		name="eStand";
-		imgList = imgL.loadSheetImages("res/img/evil wizard/"+name, 1);
+		imgList = imgL.loadSheetImages("img/evil wizard/"+name, 1);
 		imgL.insertImages(name, imgList);
 		nameList.add(name);
 		
 		name="evilShip";
-		imgList = imgL.loadSheetImages("res/img/evil wizard/"+name, 1);
+		imgList = imgL.loadSheetImages("img/evil wizard/"+name, 1);
 		imgL.insertImages(name, imgList);
 		nameList.add(name);
 		
 		name="skull";
-		imgList = imgL.loadSheetImages("res/img/evil wizard/"+name, 3);
+		imgList = imgL.loadSheetImages("img/evil wizard/"+name, 3);
 		imgL.insertImages(name, imgList);
 		nameList.add(name);
 		
 		name="dead";
 		imgList = new ArrayList<BufferedImage>();
-		imgList.add(imgL.loadImage("res/img/explosion1.png"));
+		imgList.add(imgL.loadImage("img/explosion1.png"));
 		imgL.insertImages(name, imgList);
 		nameList.add(name);
 		
@@ -139,22 +139,22 @@ public class GameFrame extends JFrame {
 		
 		//loading fireballs img
 		name="fire";
-		imgList = imgL.loadSheetImages("res/img/"+name, 1);
+		imgList = imgL.loadSheetImages("img/"+name, 1);
 		imgL.insertImages(name, imgList);
 		nameList.add(name);
 		
 		name="blast";
-		imgList = imgL.loadSheetImages("res/img/"+name, 1);
+		imgList = imgL.loadSheetImages("img/"+name, 1);
 		imgL.insertImages(name, imgList);
 		nameList.add(name);
 		
 		name="bomb";
-		imgList = imgL.loadSheetImages("res/img/"+name, 1);
+		imgList = imgL.loadSheetImages("img/"+name, 1);
 		imgL.insertImages(name, imgList);
 		nameList.add(name);
 		
 		name="laser";
-		imgList = imgL.loadSheetImages("res/img/"+name, 1);
+		imgList = imgL.loadSheetImages("img/"+name, 1);
 		imgL.insertImages(name, imgList);
 		nameList.add(name);
 		
@@ -162,12 +162,12 @@ public class GameFrame extends JFrame {
 		
 		//loading present img
 		name="present";
-		imgList = imgL.loadSheetImages("res/img/"+name, 1);
+		imgList = imgL.loadSheetImages("img/"+name, 1);
 		imgL.insertImages(name, imgList);
 		nameList.add(name);
 		
 		name="specialPresent";
-		imgList = imgL.loadSheetImages("res/img/"+name, 1);
+		imgList = imgL.loadSheetImages("img/"+name, 1);
 		imgL.insertImages(name, imgList);
 		nameList.add(name);
 		
@@ -176,49 +176,49 @@ public class GameFrame extends JFrame {
 		//loading background img
 		name="menuBackground";
 		imgList = new ArrayList<BufferedImage>();
-		imgList.add(imgL.loadImage("res/img/menuBackground.jpg"));
+		imgList.add(imgL.loadImage("img/menuBackground.jpg"));
 		imgL.insertImages(name, imgList);
 		nameList.add(name);
 		
 		name="background level1";
 		imgList = new ArrayList<BufferedImage>();
-		imgList.add(imgL.loadImage("res/img/background level1.jpg"));
+		imgList.add(imgL.loadImage("img/background level1.jpg"));
 		imgL.insertImages(name, imgList);
 		nameList.add(name);
 		
 		name="background level2";
 		imgList = new ArrayList<BufferedImage>();
-		imgList.add(imgL.loadImage("res/img/background level2.jpg"));
+		imgList.add(imgL.loadImage("img/background level2.jpg"));
 		imgL.insertImages(name, imgList);
 		nameList.add(name);
 		
 		name="background level3";
 		imgList = new ArrayList<BufferedImage>();
-		imgList.add(imgL.loadImage("res/img/background level3.jpg"));
+		imgList.add(imgL.loadImage("img/background level3.jpg"));
 		imgL.insertImages(name, imgList);
 		nameList.add(name);
 
 		name="letters";
 		imgList = new ArrayList<BufferedImage>();
-		imgList.add(imgL.loadImage("res/img/letters.png"));
+		imgList.add(imgL.loadImage("img/letters.png"));
 		imgL.insertImages(name, imgList);
 		nameList.add(name);
 
 		name="bag of presents";
 		imgList = new ArrayList<BufferedImage>();
-		imgList.add(imgL.loadImage("res/img/present.png"));
+		imgList.add(imgL.loadImage("img/present.png"));
 		imgL.insertImages(name, imgList);
 		nameList.add(name);
 		
 		name="victory1";
 		imgList = new ArrayList<BufferedImage>();
-		imgList.add(imgL.loadImage("res/img/victory1.png"));
+		imgList.add(imgL.loadImage("img/victory1.png"));
 		imgL.insertImages(name, imgList);
 		nameList.add(name);
 		
 		name="victory2";
 		imgList = new ArrayList<BufferedImage>();
-		imgList.add(imgL.loadImage("res/img/victory2.png"));
+		imgList.add(imgL.loadImage("img/victory2.png"));
 		imgL.insertImages(name, imgList);
 		nameList.add(name);
 	}

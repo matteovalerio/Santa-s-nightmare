@@ -1,7 +1,9 @@
 package com.game.myGame;
 
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 
 import javax.sound.sampled.AudioFormat;
@@ -21,8 +23,8 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  */
 public class AudioEffects {
 	
-	private String [] url = {"res/sounds/floop2_x.wav", "res/sounds/shoot.wav", "res/sounds/evil spell.wav", "res/sounds/grunt.wav", "res/sounds/explosion.wav",
-			"res/sounds/evilLaugh.wav","res/sounds/game over.wav","res/sounds/evilYou.wav","res/sounds/evilHell.wav" };
+	private String [] url = {"sounds/floop2_x.wav", "sounds/shoot.wav", "sounds/evil spell.wav", "sounds/grunt.wav", "sounds/explosion.wav",
+			"sounds/evilLaugh.wav","sounds/game over.wav","sounds/evilYou.wav","sounds/evilHell.wav" };
 	private String [] names = {"menu","shoot","evilSpell","santaGrunt","evilGrunt","evilLaugh","gameOver","evilYou","evilHell"};
 	private File file;
 	private AudioInputStream input;
@@ -43,11 +45,14 @@ public class AudioEffects {
 	 */
 	private void init() {
 		for(int i=0;i<url.length;i++) {
-			file = new File(url[i]);
+			/*file = new File(url[i]);
 			if(!file.exists())
-				return;
+				return;*/
 			try {
-				input = AudioSystem.getAudioInputStream(file);
+				InputStream in = getClass().getClassLoader().getResourceAsStream(url[i]);
+				InputStream bufferedIn = new BufferedInputStream(in);
+				input = AudioSystem.getAudioInputStream(bufferedIn);
+				//input = AudioSystem.getAudioInputStream(file);
 				format =input.getFormat();
 				info = new DataLine.Info(Clip.class, format);
 			

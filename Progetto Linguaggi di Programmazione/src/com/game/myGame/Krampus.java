@@ -57,7 +57,7 @@ public class Krampus extends Enemy {
 	private void finalAttack3() {
 		counter = fires.size();
 		if(counter<2) {
-			SpecialFire f = new SpecialFire(getPosX(), getPosY(), "fire", getImageLoader(), fireCounter);
+			SpecialFire f = new SpecialFire(getPosX(), getPosY(), "laser", getImageLoader(), fireCounter);
 			f.laser();
 			fires.add(f);
 		}

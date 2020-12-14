@@ -9,8 +9,11 @@ import javax.sound.sampled.DataLine;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.HashMap;
 
 
@@ -23,8 +26,8 @@ public class AudioManager {
 
 	private AudioInputStream input;
 	private AudioFormat format;
-	private String [] urlFile = {"res/sounds/MainTitle.wav","res/sounds/Level1.wav","res/sounds/ocean.wav","res/sounds/final.wav","res/sounds/endMusic.wav",
-			"res/sounds/level win2.wav","res/sounds/level win.wav"} ;
+	private String [] urlFile = {"sounds/MainTitle.wav","sounds/Level1.wav","sounds/ocean.wav","sounds/final.wav","sounds/endMusic.wav",
+			"sounds/level win2.wav","sounds/level win.wav"} ;
 	private String [] names = {"menu","level1","level2","level3","victory","levelWin2","levelWin"};
 	private File [] file = new File[urlFile.length];
 	private DataLine.Info info;
@@ -46,16 +49,21 @@ public class AudioManager {
 	 */
 	private void init() {
 		Clip c;
+
 		for(int i=0;i<urlFile.length;i++) {
-			file[i] = new File(urlFile[i]);
+			/*file[i] = new File(urlFile[i]);
 			if(!file[i].exists())
-				return;
+				return;*/
+			
 			
 			input = null;
 			info = null;
 			format = null;
-			try {
-				input = AudioSystem.getAudioInputStream(file[i]);
+			try {				
+				InputStream in = getClass().getClassLoader().getResourceAsStream(urlFile[i]);
+				InputStream bufferedIn = new BufferedInputStream(in);
+				input = AudioSystem.getAudioInputStream(bufferedIn);
+				//input = AudioSystem.getAudioInputStream(file[i]);
 				format = input.getFormat();
 				info = new DataLine.Info(Clip.class, format);
 				try {

@@ -4,12 +4,14 @@ import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 
+
+
 import java.util.ArrayList;
 import java.awt.Graphics2D;
-import java.awt.GraphicsConfiguration;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 /**
  * This class loads all the images and stores them in some data structure.
@@ -60,8 +62,8 @@ public class ImageLoader {
 	public BufferedImage loadImage(String path) {
 		
 		try {
-			BufferedImage im = ImageIO.read(new File(path));
-			
+			URL url=  getClass().getClassLoader().getResource(path);// BufferedImage im =ImageIO.read(new File(path));
+			BufferedImage im = ImageIO.read(url);
 			Graphics2D g2d = im.createGraphics();
 			g2d.drawImage(im, 0, 0, null);
 			g2d.dispose();
