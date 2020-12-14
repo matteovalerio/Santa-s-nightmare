@@ -158,11 +158,6 @@ public class Level1 extends Level implements Runnable {
 		});
 		
 		
-		addKeyBinding(this, KeyEvent.VK_ESCAPE, "pause", false, (evt)->{
-			pauseGame();
-		});
-		
-		
 	}
 	
 	/**
@@ -179,21 +174,6 @@ public class Level1 extends Level implements Runnable {
 	}
 	
 	
-	/**
-	 * Invoked to pause the Game
-	 */
-	public void pauseGame() {
-		isPaused=true;
-	}
-	
-	
-	/**
-	 * Invoked to resume the game
-	 */
-	public void resumeGame() {
-		isPaused = false;
-	}
-	
 	
 	/**
 	 * Invoked to start the thread and the level
@@ -205,14 +185,6 @@ public class Level1 extends Level implements Runnable {
 			animator.start();
 		}
 	}
-	
-	/**
-	 * Invoked to stop the level
-	 */
-	private void stopLevel() {
-		running = false;
-	}
-	
 
 	@Override
 	/**
