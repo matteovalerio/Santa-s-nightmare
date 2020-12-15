@@ -15,9 +15,9 @@ import javax.swing.Timer;
  */
 public class Enemy extends Sprite {
 
-	protected static final int LEVEL1 = 100;
-	protected static final int LEVEL2 = 200;
-	protected static final int LEVEL3 = 400;
+	protected static final int LEVEL1 = 60;
+	protected static final int LEVEL2 = 120;
+	protected static final int LEVEL3 = 300;
 	private int startingLife;
 	private int life; //life of the Enemy
 	private ArrayList<Fire> fires = new ArrayList<>();

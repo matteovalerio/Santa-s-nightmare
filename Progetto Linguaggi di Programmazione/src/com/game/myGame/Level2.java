@@ -29,6 +29,7 @@ public class Level2 extends Level implements Runnable{
 	private long startTime;
 	private long secondsPassed;
 	private int minutesPassed;
+	private boolean skip = false;
 	
 
 
@@ -144,6 +145,10 @@ public class Level2 extends Level implements Runnable{
 			santa.startLooping(400, 4);
 		});
 		
+		addKeyBinding(this, KeyEvent.VK_ENTER, "skip", false, (evt)->{
+			skip=true;
+		});
+		
 	}
 	
 	/**
@@ -202,22 +207,12 @@ public class Level2 extends Level implements Runnable{
 	@Override
 	public void run() {
 		//start scene
-		startRender();
-		paintScreen();
 		getFrame().getAudioEffects().startSound("evilYou");
-		try {
-			Thread.sleep(START_DELAY);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		
-		dbg.setFont(new Font(font,Font.BOLD,70));
-		dbg.drawString("LEVEL 2: THE OCEAN", getFrame().getWidth()/3, 70);
-		paintScreen();
-		try {
-			Thread.sleep(LEVEL_DELAY);
-		} catch(InterruptedException e) {
-			e.printStackTrace();
+		while(!skip) {
+			startRender();
+			paintScreen();		
+
+
 		}
 		running = true;
 		startTime = System.currentTimeMillis();
@@ -267,7 +262,7 @@ public class Level2 extends Level implements Runnable{
 		x = getWidth()/4;
 		y = getHeight()*2/5;
 		
-		dbg.setFont(new Font(font,Font.BOLD,30));
+		dbg.setFont(new Font(font,Font.BOLD,25));
 		dbg.setColor(Color.WHITE);
 		dbg.drawString("you just found the letters of all children in the world..",x,y);
 		y = getHeight()*3/5;
@@ -277,6 +272,14 @@ public class Level2 extends Level implements Runnable{
 		dbg.setColor(Color.RED);
 		dbg.setFont(new Font("French Script MT", Font.BOLD,50));
 		dbg.drawString("A very bad kid", x, y);
+		
+		y = getHeight()*6/7;
+		dbg.setFont(new Font(font, Font.BOLD,20));
+		dbg.setColor(Color.WHITE);
+		dbg.drawString("ENTER TO SKIP", x*2, y);
+		dbg.setColor(Color.RED);
+		dbg.setFont(new Font(font,Font.BOLD,70));
+		dbg.drawString("LEVEL 2: THE OCEAN", getFrame().getWidth()/3, 70);
 		
 		
 		
@@ -313,7 +316,7 @@ public class Level2 extends Level implements Runnable{
 		else
 			dbg.drawString("Time: " + minutesPassed + "m" +  secondsPassed + "s", 100, 100);
 	
-		dbg.drawString("Santa: "+santa.getLifePercent()+"%"+"     The Guy: "+wizard.getLifePercent()+"%", getWidth()*3/4, 100);
+		dbg.drawString("Santa: "+santa.getLifePercent()+"%"+"     The Guy: "+wizard.getLifePercent()+"%", getFrame().getWidth()/2, 100);
 		
 		//check if santa has special shoots 
 		//if so it display an icon on the screen

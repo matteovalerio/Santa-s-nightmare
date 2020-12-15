@@ -25,7 +25,7 @@ public class Level3 extends Level implements Runnable{
 	private long secondsPassed;
 	private int minutesPassed;
 	
-
+	private boolean skip = false;
 
 	
 	private Thread animator;
@@ -139,6 +139,9 @@ public class Level3 extends Level implements Runnable{
 			santa.startLooping(400, 4);
 		});
 		
+		addKeyBinding(this, KeyEvent.VK_ENTER, "skip", false, (evt)->{
+			skip=true;
+		});
 		
 	}
 	
@@ -198,23 +201,13 @@ public class Level3 extends Level implements Runnable{
 	@Override
 	public void run() {
 		//start scene
-		startRender();
-		paintScreen();
+
 		getFrame().getAudioEffects().startSound("evilHell");
-		try {
-			Thread.sleep(START_DELAY);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+		while(!skip) {
+			startRender();
+			paintScreen();		
 		}
-		
-		dbg.setFont(new Font(font,Font.BOLD,70));
-		dbg.drawString("LEVEL 3: THE SKY", getFrame().getWidth()/3, 70);
-		paintScreen();
-		try {
-			Thread.sleep(LEVEL_DELAY);
-		} catch(InterruptedException e) {
-			e.printStackTrace();
-		}
+
 		running = true;
 		startTime = System.currentTimeMillis();
 		getFrame().getAudioManager().playLoop("level3");
@@ -264,7 +257,7 @@ public class Level3 extends Level implements Runnable{
 		x = getWidth()/4;
 		y = getHeight()*2/5;
 		
-		dbg.setFont(new Font(font,Font.BOLD,30));
+		dbg.setFont(new Font(font,Font.BOLD,25));
 		dbg.setColor(Color.WHITE);
 		dbg.drawString("it's almosto midnight..and i have your sleigh.",x,y);
 		y = getHeight()*3/5;
@@ -275,7 +268,14 @@ public class Level3 extends Level implements Runnable{
 		dbg.setFont(new Font("French Script MT", Font.BOLD,50));
 		dbg.drawString("The Krampus", x, y);
 		
-		
+		y = getHeight()*6/7;
+		dbg.setFont(new Font(font, Font.BOLD,20));
+		dbg.setColor(Color.WHITE);
+
+		dbg.drawString("ENTER TO SKIP", x*2, y);
+		dbg.setColor(Color.RED);
+		dbg.setFont(new Font(font,Font.BOLD,70));
+		dbg.drawString("LEVEL 3: THE SKY", getFrame().getWidth()/3, 70);
 		
 	}
 
@@ -424,18 +424,28 @@ public class Level3 extends Level implements Runnable{
 			dbg2.setColor(Color.WHITE);
 			dbg2.setFont(new Font("French Script MT", Font.BOLD,50));
 			dbg2.drawString("Santa Claus", x, y);
+			paintScreen();
+			
+			try {
+				Thread.sleep(START_DELAY);
+			}
+			catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			getFrame().getAudioManager().playLoop("victory");
+			credits(dbg2);
+			getFrame().getAudioManager().stopLoop("victory");
 		}
-		paintScreen();
-		
-		try {
-			Thread.sleep(START_DELAY);
+		else {
+			paintScreen();
+			
+			try {
+				Thread.sleep(START_DELAY);
+			}
+			catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
-		catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		getFrame().getAudioManager().playLoop("victory");
-		credits(dbg2);
-		getFrame().getAudioManager().stopLoop("victory");
 
 		
 	}

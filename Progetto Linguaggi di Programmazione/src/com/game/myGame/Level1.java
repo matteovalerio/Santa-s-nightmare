@@ -33,6 +33,7 @@ public class Level1 extends Level implements Runnable {
 	private long currentTime;
 	private long secondsPassed;
 	private long minutesPassed;
+	private boolean skip = false;
 	
 	private BufferedImage background;
 	
@@ -157,6 +158,10 @@ public class Level1 extends Level implements Runnable {
 			santa.startLooping(ANIM_PERIOD, SEQ_DURATION);
 		});
 		
+		addKeyBinding(this, KeyEvent.VK_ENTER, "skip", false, (evt)->{
+			skip=true;
+		});
+		
 		
 	}
 	
@@ -193,21 +198,11 @@ public class Level1 extends Level implements Runnable {
 	 * It will also adjourn the statistics with storeStats()
 	 */
 	public void run() {
-		startRender();
-		paintScreen();
 		getFrame().getAudioEffects().startSound("evilLaugh");
-		try {
-			Thread.sleep(START_DELAY);
-		} catch(InterruptedException e) {
-			e.printStackTrace();
-		}
-		dbg.setFont(new Font(font,Font.BOLD,70));
-		dbg.drawString("LEVEL 1: THE FOREST", getFrame().getWidth()/3, 70);
-		paintScreen();
-		try {
-			Thread.sleep(LEVEL_DELAY);
-		} catch(InterruptedException e) {
-			e.printStackTrace();
+
+		while(!skip) {
+			startRender();
+			paintScreen();
 		}
 		running = true;
 		startTime = System.currentTimeMillis();
@@ -265,7 +260,7 @@ public class Level1 extends Level implements Runnable {
 		x = getWidth()/4;
 		y = getHeight()*2/5;
 		
-		dbg.setFont(new Font(font,Font.BOLD,30));
+		dbg.setFont(new Font(font,Font.BOLD,25));
 		dbg.setColor(Color.WHITE);
 		dbg.drawString("last year you stole my Christmas, giving me just coal!",x,y);
 		y = getHeight()*3/5;
@@ -275,7 +270,13 @@ public class Level1 extends Level implements Runnable {
 		dbg.setColor(Color.RED);
 		dbg.setFont(new Font("French Script MT", Font.BOLD,50));
 		dbg.drawString("A Friend?", x, y);
-		
+		dbg.setFont(new Font(font, Font.BOLD,20));
+		dbg.setColor(Color.WHITE);
+		y = getHeight()*6/7;
+		dbg.drawString("ENTER TO SKIP", x*2, y);
+		dbg.setFont(new Font(font,Font.BOLD,70));
+		dbg.setColor(Color.RED);
+		dbg.drawString("LEVEL 1: THE FOREST", getFrame().getWidth()/3, 70);
 		
 		
 	}

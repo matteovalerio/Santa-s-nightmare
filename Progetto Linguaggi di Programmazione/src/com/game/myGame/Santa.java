@@ -260,7 +260,10 @@ public class Santa extends Sprite {
 	 * @return The percentage of the remaining life of santa
 	 */
 	public int getLifePercent() {
-		return life *100/STARTING_LIFE;
+		int ret =life *100/STARTING_LIFE;
+		if(ret<0)
+			ret = 0;
+		return ret;
 	}
 
 	
