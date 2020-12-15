@@ -259,7 +259,7 @@ public class Level3 extends Level implements Runnable{
 		
 		dbg.setFont(new Font(font,Font.BOLD,25));
 		dbg.setColor(Color.WHITE);
-		dbg.drawString("it's almosto midnight..and i have your sleigh.",x,y);
+		dbg.drawString("it's almost midnight..and I have your sleigh.",x,y);
 		y = getHeight()*3/5;
 		dbg.drawString("Come and find it in the sky!!", x, y);
 		
