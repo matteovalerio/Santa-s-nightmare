@@ -31,7 +31,6 @@ public class AudioManager {
 	private String [] names = {"menu","level1","level2","level3","victory","levelWin2","levelWin"};
 	private File [] file = new File[urlFile.length];
 	private DataLine.Info info;
-	//private Clip [] audioClip = new Clip[urlFile.length];
 	private HashMap<String,Clip> audioClips = new HashMap<>();
 	private HashMap<String,AudioInputStream> inputStreams = new HashMap<>();
 	
@@ -51,11 +50,7 @@ public class AudioManager {
 		Clip c;
 
 		for(int i=0;i<urlFile.length;i++) {
-			/*file[i] = new File(urlFile[i]);
-			if(!file[i].exists())
-				return;*/
-			
-			
+
 			input = null;
 			info = null;
 			format = null;
@@ -63,7 +58,6 @@ public class AudioManager {
 				InputStream in = getClass().getClassLoader().getResourceAsStream(urlFile[i]);
 				InputStream bufferedIn = new BufferedInputStream(in);
 				input = AudioSystem.getAudioInputStream(bufferedIn);
-				//input = AudioSystem.getAudioInputStream(file[i]);
 				format = input.getFormat();
 				info = new DataLine.Info(Clip.class, format);
 				try {

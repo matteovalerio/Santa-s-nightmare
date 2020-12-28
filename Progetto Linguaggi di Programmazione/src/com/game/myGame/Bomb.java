@@ -11,7 +11,6 @@ public class Bomb extends Fire {
 	
 	public Bomb(int posX, int posY, String name, ImageLoader imgL, int count) {
 		super(posX, posY, name, imgL, count);
-		// TODO Auto-generated constructor stub
 	}
 	
 	/**

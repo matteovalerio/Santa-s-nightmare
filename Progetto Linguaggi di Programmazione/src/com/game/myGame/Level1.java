@@ -221,7 +221,6 @@ public class Level1 extends Level implements Runnable {
 			}
 			storeStats();
 		}
-	//	System.exit(0);
 		
 	}
 	

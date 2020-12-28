@@ -45,14 +45,10 @@ public class AudioEffects {
 	 */
 	private void init() {
 		for(int i=0;i<url.length;i++) {
-			/*file = new File(url[i]);
-			if(!file.exists())
-				return;*/
 			try {
 				InputStream in = getClass().getClassLoader().getResourceAsStream(url[i]);
 				InputStream bufferedIn = new BufferedInputStream(in);
 				input = AudioSystem.getAudioInputStream(bufferedIn);
-				//input = AudioSystem.getAudioInputStream(file);
 				format =input.getFormat();
 				info = new DataLine.Info(Clip.class, format);
 			

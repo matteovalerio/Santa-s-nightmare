@@ -51,7 +51,6 @@ public class GameFrame extends JFrame {
 		
 		
 
-	//	audio.playLoop(menu.getName());
 		buildFrame();
 	}
 	
